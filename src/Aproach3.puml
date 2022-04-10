@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+!pragma layout smetana
+
 'array de pedidos hechos por robot
 
 abstract Client
