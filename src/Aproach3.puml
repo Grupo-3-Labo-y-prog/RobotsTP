@@ -1,0 +1,140 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'array de pedidos hechos por robot
+
+abstract Client
+class Membership
+class Platinum
+class Classic
+class Economic
+class Request
+class TypeClean
+class Admission
+class Process
+class SearchRobot
+class Payment
+class Robot
+
+Client *-- Membership
+Membership <|-- Platinum
+Membership <|-- Classic
+Membership <|-- Economic
+Process <-- Admission
+Process <-- SearchRobot
+Process <-- Comunication
+Process *-- Robot
+Process *-- Request
+Request *-- Client
+Request *-- TypeClean
+
+
+abstract Comunication{
++printBill(Process)
++printError(Error)
+input()
+}
+
+class Robot{
+-String model
+-String surface
+-boolean canOrder
+-boolean canShine
+-int cost
+-Collection requests
+}
+
+class Process{
+
+-Collection clients
+-Collection robots
+-Robot
+-Request
+
+'llama a admission
++void process(Request)
++String admissionOfRequest()
++Robot searchRobot()
++void update()
++void print()
+
+
+}
+
+'posible clase
+class Admission{
+-ArrayList requestsApproved
+-ArrayList requestsReject
+-String message
+-Payment
+'-ArrayList clients
+
+'ej: pedir un ordenamiento cuando no puede
++boolean validMembership(Request)
++boolean validDebt(Client)
++String verified(Request)
+
+
+}
+
+
+class SearchRobot{
+
+-HashMap<String,Robot> robots
+-Request
+
+'llama a la funcion selectRobot y recibe el robot ideal
++ Robot suitableRobot(Request)
+'recibe un request y realiza una iteracion
+'en la colleccion robots donde compara los requerimientos
++ Robot selectRobot(Request, String surface)
+'si es Platinum compara la cola que tiene con un min y se guarda la key
+'si es el primero se fija si es null y lo asigna
++ String compareRequests(Robot)
+'si no es platinum compara el costo con un min y guarda la key para devolverla
++ String compareCost(Robot)
+}
+
+'posible clase lo mismo arriba
+class Main{
+
+Process.process()
+
+}
+
+class Request{
+-int ID
+-Client
+-boolean ordering
+-TypeClean
+'-String address?
+
+}
+
+abstract Client{
+-int ID
+-Membership
+-int ordering
+-int cleaning
+-boolean suitable
+'Collection requests
+'String address?
++boolean isApto()
+'return limitOrder > ordering && limitClean > cleaning
+}
+
+class Membership{
+-String type
+-int limitDebt
+-int limitOrder
+-int limitClean
+-boolean canOrder
+}
+
+class Platinum{
+final static int MAX_ORDER
+final static int MAX_CLEAN
+final static int LIMIT_DEBT
+}
+
+@enduml
