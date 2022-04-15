@@ -1,10 +1,10 @@
 abstract public class Client {
 
-    int id;
-    Membership membership;
-    int ordering;
-    int cleaning;
-    boolean suitable;
+    private int id;
+    private Membership membership;
+    private int ordering;
+    private int cleaning;
+    private boolean suitable;
 
     public int getId() {
         return id;
@@ -50,8 +50,5 @@ abstract public class Client {
         this.suitable = suitable;
     }
 
-    boolean isSuitable(){
-        return true;
-    }
 
 }

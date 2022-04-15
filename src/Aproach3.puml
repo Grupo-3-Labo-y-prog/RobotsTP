@@ -13,22 +13,33 @@ class Economic
 class Request
 class TypeClean
 class Admission
-class Process
+class Company
 class SearchRobot
 class Payment
-class Robot
+abstract class Robot
+class K311Yfl
+class K311Yfu
+class P011H
+class K311Ya
+class S031RTY
+
 
 Client *-- Membership
 Membership <|-- Platinum
 Membership <|-- Classic
 Membership <|-- Economic
-Process <-- Admission
-Process <-- SearchRobot
-Process <-- Comunication
-Process *-- Robot
-Process *-- Request
+Company <-- Admission
+Company <-- SearchRobot
+Company <-- Comunication
+Company *-- Robot
+Company *-- Request
 Request *-- Client
 Request *-- TypeClean
+Robot <|---K311Ya
+Robot <|---S031RTY
+Robot <|---P011H
+Robot <|---K311Yfu
+Robot <|---K311Yfl
 
 
 abstract Comunication{
@@ -37,7 +48,7 @@ abstract Comunication{
 input()
 }
 
-class Robot{
+abstract class Robot{
 -String model
 -String surface
 -boolean canOrder
@@ -46,7 +57,7 @@ class Robot{
 -Collection requests
 }
 
-class Process{
+class Company{
 
 -Collection clients
 -Collection robots
@@ -98,11 +109,7 @@ class SearchRobot{
 }
 
 'posible clase lo mismo arriba
-class Main{
 
-Process.process()
-
-}
 
 class Request{
 -int ID
