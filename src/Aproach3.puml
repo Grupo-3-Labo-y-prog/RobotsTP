@@ -30,7 +30,7 @@ Membership <|-- Classic
 Membership <|-- Economic
 Company <-- Admission
 Company <-- SearchRobot
-Company <-- Comunication
+Company <- Comunication
 Company *-- Robot
 Company *-- Request
 Request *-- Client
