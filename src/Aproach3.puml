@@ -59,10 +59,11 @@ abstract class Robot{
 
 class Company{
 
--Collection clients
--Collection robots
+-HashMap clients
+-HashMap robots
 -Robot
 -Request
+-Admission admission;
 
 'llama a admission
 +void process(Request)
@@ -78,8 +79,7 @@ class Company{
 class Admission{
 -ArrayList requestsApproved
 -ArrayList requestsReject
--String message
--Payment
+-Payment payment
 '-ArrayList clients
 
 'ej: pedir un ordenamiento cuando no puede
@@ -94,7 +94,7 @@ class Admission{
 class SearchRobot{
 
 -HashMap<String,Robot> robots
--Request
+'-Request
 
 'llama a la funcion selectRobot y recibe el robot ideal
 + Robot suitableRobot(Request)
@@ -116,6 +116,7 @@ class Request{
 -Client
 -boolean ordering
 -TypeClean
+-string surface
 '-String address?
 
 }
