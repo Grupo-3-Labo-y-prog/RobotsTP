@@ -2,8 +2,8 @@ abstract public class Client {
 
     private int id;
     private Membership membership;
-    private int ordering;
-    private int cleaning;
+    private int ordering; //contador de los ordenamientos que pidio en ese mes
+    private int cleaning; //contador de las limpiezas que pidio en ese mes
     private boolean suitable;
 
     public int getId() {
