@@ -45,12 +45,4 @@ deactivate DataBaseRobot
 Company --> Request: return a receipt with the date and the service
 deactivate Company
 
-
-
-
-'Alice -> Bob: Authentication Request
-'Bob --> Alice: Authentication Response
-
-'Alice -> Bob: Another authentication Request
-'Alice <-- Bob: another authentication Response
 @enduml
