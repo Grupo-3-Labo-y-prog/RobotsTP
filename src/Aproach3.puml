@@ -128,7 +128,7 @@ abstract Client{
 -int cleaning
 -boolean suitable
 'Collection requests
-'String address?
+-String address?
 +boolean isApto()
 'return limitOrder > ordering && limitClean > cleaning
 }
