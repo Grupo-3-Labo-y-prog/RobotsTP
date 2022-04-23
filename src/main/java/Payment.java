@@ -1,4 +1,3 @@
-public interface Payment {
-
-    int findClient(Client id);
+public class Payment {
+    int findClient(Client id){return 0;}
 }
