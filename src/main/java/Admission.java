@@ -26,7 +26,7 @@ public class Admission {
 
     public void validDebt(Client client){
 
-        if (payment.findClient(client) > client.getMembership().getLimitDebt()){
+        if (payment.getAmount(client.id) > client.getMembership().getLimitDebt()){
             //throw
         }
     }
