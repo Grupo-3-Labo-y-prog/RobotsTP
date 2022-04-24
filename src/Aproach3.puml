@@ -85,8 +85,6 @@ class Admission{
 'ej: pedir un ordenamiento cuando no puede
 +boolean validMembership(Request)
 +boolean validDebt(Client)
-+String verified(Request)
-
 
 }
 
@@ -113,24 +111,22 @@ class SearchRobot{
 
 class Request{
 -int ID
+-String address
 -Client
 -boolean ordering
 -TypeClean
 -string surface
-'-String address?
 
 }
 
 abstract Client{
 -int ID
+-string nombre;
 -Membership
 -int ordering
 -int cleaning
 -boolean suitable
-'Collection requests
--String address?
-+boolean isApto()
-'return limitOrder > ordering && limitClean > cleaning
+
 }
 
 class Membership{
