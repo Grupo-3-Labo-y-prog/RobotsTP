@@ -40,7 +40,9 @@ public class Admission {
 
     private void canOrdering(Request request, Membership membership) throws CantOrderingException {
 
-        if (request.isOrdering() != membership.isCanOrder()){
+        boolean containOrdering = request.getRequestedTasks().contains(Tasks.ORDERING);
+
+        if (containOrdering != membership.isCanOrder()){
             throw new CantOrderingException("membership owned does not include ordering");
         }
 

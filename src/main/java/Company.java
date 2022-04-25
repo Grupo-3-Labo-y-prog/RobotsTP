@@ -15,7 +15,7 @@ public class Company {
     public void processRequest(){
         try {
             admission.validMembership(this.request);
-            admission.validDebt(this.request.getClient());
+            admission.validDebt(this.request);
             //admissionRequest();
             //this.robots = assingRobot();
             update(this.request.getClient());
