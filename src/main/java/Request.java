@@ -1,32 +1,26 @@
+
+
+import java.util.ArrayList;
+
 public class Request {
-    private int id;
+    private  int ID;
     private Client client;
-    private boolean ordering;
-    private String surface;
-    //private TypeClean;
+    private ArrayList <Tasks> requestedTasks;
+    private TypeClean cleaning;
 
-
-    public Request(int id, Client client, boolean ordering, String surface) {
-        this.id = id;
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean cleaning) {
+        this.ID = ID;
         this.client = client;
-        this.ordering = ordering;
-        this.surface = surface;
+        this.requestedTasks = requestedTasks;
+        this.cleaning = cleaning;
     }
 
-    public String getSurface() {
-        return surface;
+    public int getID() {
+        return ID;
     }
 
-    public void setSurface(String surface) {
-        this.surface = surface;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public Client getClient() {
@@ -37,11 +31,19 @@ public class Request {
         this.client = client;
     }
 
-    public boolean isOrdering() {
-        return ordering;
+    public ArrayList<Tasks> getRequestedTasks() {
+        return requestedTasks;
     }
 
-    public void setOrdering(boolean ordering) {
-        this.ordering = ordering;
+    public void setRequestedTasks(ArrayList<Tasks> requestedTasks) {
+        this.requestedTasks = requestedTasks;
+    }
+
+    public TypeClean getCleaning() {
+        return cleaning;
+    }
+
+    public void setCleaning(TypeClean cleaning) {
+        this.cleaning = cleaning;
     }
 }

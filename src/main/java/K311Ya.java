@@ -1,12 +1,18 @@
-public class K311Ya extends Robot{
+
+
+public class K311Ya extends Robot implements Ordering, Cleanning,Polishing {
 
     private final static String MODEL = "K311Ya";
     private final static String SURFACE = "Floor/Furniture";
-    private  final  static boolean CAN_ORDER = true;
-    private  final  static boolean CAN_SHINE = true;
     private final static int COST = 5000;
 
     public K311Ya() {
-        super(MODEL,SURFACE,CAN_ORDER,CAN_SHINE,COST);
+        super(MODEL,SURFACE,COST);
+    }
+
+    @Override
+    public boolean implementsInterface(Tasks task) {
+        return task.toString().equalsIgnoreCase(Ordering.class.getSimpleName()) && task.toString().equalsIgnoreCase(Polishing.class.getSimpleName())
+                && task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName());
     }
 }

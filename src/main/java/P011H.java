@@ -1,17 +1,18 @@
-import java.util.Collection;
 
-public class P011H extends Robot {
+
+public class P011H extends Robot implements Cleanning,Polishing {
 
     private final static String MODEL = "P011H";
     private final static String SURFACE = "Floor";
-    private  final  static boolean CAN_ORDER = false;
-    private  final  static boolean CAN_SHINE = true;
     private final static int COST = 1500;
 
 
-
     public P011H() {
-        super(MODEL, SURFACE,CAN_ORDER,CAN_SHINE, COST);
+        super(MODEL, SURFACE, COST);
     }
-
+    @Override
+    public boolean implementsInterface(Tasks task) {
+        return task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName())
+                && task.toString().equalsIgnoreCase(Polishing.class.getSimpleName());
+    }
 }
