@@ -1,0 +1,178 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract Client
+class Membership
+class Platinum
+class Classic
+class Economic
+class Request
+class TypeClean
+class Surface
+class floor
+class furniture
+class Admission
+class Company
+class assignRobot
+class Payment
+abstract class Robot
+interface Ordering
+interface Cleanning
+interface Polishing
+class K311Yfl
+class K311Yfu
+class P011H
+class K311Ya
+class S031RTY
+
+
+Client *-- Membership
+Membership <|-- Platinum
+Membership <|-- Classic
+Membership <|-- Economic
+Company <-- Admission
+Company <-- assignRobot
+Company <- Comunication
+Company *-- Robot
+Company *-- Request
+Request *-- Client
+Request *-- TypeClean
+Request *---Surface
+Surface<|-- floor
+Surface<|-- furniture
+Robot <|--- K311Ya
+Robot <|---S031RTY
+Robot <|---P011H
+Robot <|---K311Yfu
+Robot <|--- K311Yfl
+K311Yfl <|-- Cleanning
+K311Ya <|-- Cleanning
+K311Ya <|-- Polishing
+K311Ya <|-- Ordering
+S031RTY <|-- Ordering
+P011H <|-- Polishing
+P011H <|-- Cleanning
+K311Yfu <|-- Cleanning
+K311Yfu <|-- Polishing
+
+
+
+abstract Comunication{
++printBill(Process)
++printError(Error)
+input()
+}
+
+abstract class Robot{
+'-String model
+'-String surface
+'-boolean canOrder
+'-boolean canShine
+-int cost
+-Collection requests
+
+}
+
+class Company{
+
+-HashMap clients
+-TreeSet robots
+-Robot
+-Request
+-Admission admission
+-HashSet assignRobot
+
+'llama a admission
++void process(Request)
++void update()
++void print()
+
+
+}
+
+'posible clase
+class Admission{
+-ArrayList requestsApproved
+-ArrayList requestsReject
+-Payment payment
+'-ArrayList clients
+
+'ej: pedir un ordenamiento cuando no puede
++boolean validMembership(Request)
++boolean validDebt(Client)
++String verified(Request)
+
+
+}
+
+
+class assignRobot{
+-TreeSet<Robot> robots
+-HashSet <Robot> robotsAssigned
+-Request request
+
++assignationPlatinum()
++assignationOthers()
+
+
+'while Request.tareas != null
+    'recorro robots: if(robot instanceOf tarea) --> resultado.add(Robot,tarea)
+    'itero a la siguiente tarea
+    'si el robot siguiente puede hacer la otra tarea: if(robot instanceOf tarea) --> resultado.add(Robot,tarea) /se va a pisar en el mismo robot la segunda tarea (como es tree no se duplica el robot y asumo que ambas tareas la hace un solo robot. Por ahora solo asigno uno
+    'else (robot !instanceOf tarea)- voy al sig robot y así sucesivamente hasta que encuentro otro robot --> resultado.add(Robot,tarea)
+    'Aca se va a crear otro nodo de Robot voy a tener dos elementos en resultado: resultado(1): Robot XXX/LIMPIEZA - Robot YYY/ ORDENAM etc.
+    'voy a retornar el hashMap resultado y al iterarlo voy a saber que robots asigne
+}
+
+
+class Request{
+-int ID
+-Client
+-TypeClean
+-Surface surface
+'-String address?
+- tareas: List
+}
+
+abstract Client{
+-int ID
+-Membership
+-int ordering
+-int cleaning
+'String address?
+}
+
+class Membership{
+-String type
+-int limitDebt
+-int limitOrder
+-int limitClean
+-boolean canOrder
+}
+
+class Platinum{
+final static int MAX_ORDER
+final static int MAX_CLEAN
+final static int LIMIT_DEBT
+}
+
+class K311Yfl{
+limpiar: interface
+}
+class K311Yfu{
+limpiar: interface
+lustrar: interface
+}
+class P011H{
+limpiar: interface
+lustrar: interface
+}
+class S031RTY{
+ordenar: interface
+}
+class K311Ya{
+limpiar: interface
+ordenar: interface
+lustrar: interface
+}
+@enduml
