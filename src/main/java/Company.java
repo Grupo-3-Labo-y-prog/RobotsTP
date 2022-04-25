@@ -24,7 +24,7 @@ public class Company {
 
     public void admissionRequest(){
         admission.validMembership(this.request);
-        admission.validDebt(this.request.getClient());
+        admission.validDebt(this.request);
     }
 
     public Robot searchRobot(){
