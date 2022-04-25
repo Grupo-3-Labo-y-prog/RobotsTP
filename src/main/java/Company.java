@@ -1,39 +1,55 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class Company {
 
     private HashMap<Integer, Client> clients;
-    private HashSet<Robot> robots;
-    private Robot robot;
+    private TreeSet<Robot> robots;
     private Request request;
     private Admission admission;
+    //private AssingRobot assingRobot;
 
     //hacer constructor
-
+    //mejorar + hacer excepciones
     public void processRequest(){
-
         try {
-
-            admissionRequest();
-            searchRobot();
+            admission.validMembership(this.request);
+            admission.validDebt(this.request.getClient());
+            //admissionRequest();
+            //this.robots = assingRobot();
+            update(this.request.getClient());
+            print(this.request);
         }catch (Exception e){ //hacer excepcion
 
         }
     }
 
-    public void admissionRequest(){
+    //done
+    /*public void admissionRequest(){
         admission.validMembership(this.request);
         admission.validDebt(this.request.getClient());
+    }*/
+    //a chequear
+    public TreeSet<Robot> assingRobot(){
+        //this.robot = SearchRobot();
+        //return robot
+
+        return this.robots;
     }
-
-    public Robot searchRobot(){
-        return new S031RTY();
+    //done ---- a chequear
+    public void update(Client c){
+        if (clients.containsKey(c)){
+            if (request.isOrdering()){
+                c.setOrdering(c.getOrdering() + 1);
+            }
+            c.setCleaning(c.getCleaning()+1);
+        }
     }
-
-    public void update(){}
-
-    public void print(){}
+    //aclarar mensaje de salida
+    public void print(Request r){
+        //llama a la funcion comunicacion que hace diana
+    }
 
     public HashMap<Integer, Client> getClients() {
         return clients;
@@ -43,11 +59,11 @@ public class Company {
         this.clients = clients;
     }
 
-    public HashSet<Robot> getRobots() {
+    public TreeSet<Robot> getRobots() {
         return robots;
     }
 
-    public void setRobots(HashSet<Robot> robots) {
+    public void TreeSet(TreeSet<Robot> robots) {
         this.robots = robots;
     }
 
