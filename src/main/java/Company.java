@@ -10,30 +10,44 @@ public class Company {
     private Admission admission;
 
     //hacer constructor
-
+    //mejorar + hacer excepciones
     public void processRequest(){
 
         try {
-
             admissionRequest();
-            searchRobot();
+            this.robot = searchRobot();
+            update(this.request.getClient());
+            print(this.request);
         }catch (Exception e){ //hacer excepcion
 
         }
     }
 
+    //done
     public void admissionRequest(){
         admission.validMembership(this.request);
         admission.validDebt(this.request.getClient());
     }
-
+    //a chequear
     public Robot searchRobot(){
-        return new S031RTY();
+        //this.robot = SearchRobot();
+        //return robot
+
+        return this.robot;
     }
-
-    public void update(){}
-
-    public void print(){}
+    //done ---- a chequear
+    public void update(Client c){
+        if (clients.containsKey(c)){
+            if (request.isOrdering()){
+                c.setOrdering(c.getOrdering() + 1);
+            }
+            c.setCleaning(c.getCleaning()+1);
+        }
+    }
+    //aclarar mensaje de salida
+    public void print(Request r){
+        System.out.println("El pedido de " + r.getClient().getId() + " fue admitido");
+    }
 
     public HashMap<Integer, Client> getClients() {
         return clients;
