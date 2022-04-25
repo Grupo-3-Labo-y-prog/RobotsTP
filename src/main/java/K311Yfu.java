@@ -1,14 +1,17 @@
-import java.util.Collection;
 
-public class K311Yfu extends Robot{
+
+public class K311Yfu extends Robot implements Cleanning,Polishing {
     private final static String MODEL = "K311Y-fu";
     private final static String SURFACE = "Furniture";
-    private  final  static boolean CAN_ORDER = false;
-    private  final  static boolean CAN_SHINE = true;
     private final static int COST = 500;
 
 
     public K311Yfu() {
-        super(MODEL,SURFACE,CAN_ORDER,CAN_SHINE,COST);
+        super(MODEL,SURFACE,COST);
+    }
+    @Override
+    public boolean implementsInterface(Tasks task) {
+        return task.toString().equalsIgnoreCase(Polishing.class.getSimpleName())
+                && task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName());
     }
 }
