@@ -1,21 +1,23 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class Company {
 
     private HashMap<Integer, Client> clients;
-    private HashSet<Robot> robots;
-    private Robot robot;
+    private TreeSet<Robot> robots;
     private Request request;
     private Admission admission;
+    //private AssingRobot assingRobot;
 
     //hacer constructor
     //mejorar + hacer excepciones
     public void processRequest(){
-
         try {
-            admissionRequest();
-            this.robot = searchRobot();
+            admission.validMembership(this.request);
+            admission.validDebt(this.request.getClient());
+            //admissionRequest();
+            //this.robots = assingRobot();
             update(this.request.getClient());
             print(this.request);
         }catch (Exception e){ //hacer excepcion
@@ -24,16 +26,16 @@ public class Company {
     }
 
     //done
-    public void admissionRequest(){
+    /*public void admissionRequest(){
         admission.validMembership(this.request);
         admission.validDebt(this.request.getClient());
-    }
+    }*/
     //a chequear
-    public Robot searchRobot(){
+    public TreeSet<Robot> assingRobot(){
         //this.robot = SearchRobot();
         //return robot
 
-        return this.robot;
+        return this.robots;
     }
     //done ---- a chequear
     public void update(Client c){
@@ -46,7 +48,7 @@ public class Company {
     }
     //aclarar mensaje de salida
     public void print(Request r){
-        System.out.println("El pedido de " + r.getClient().getId() + " fue admitido");
+        //llama a la funcion comunicacion que hace diana
     }
 
     public HashMap<Integer, Client> getClients() {
@@ -57,11 +59,11 @@ public class Company {
         this.clients = clients;
     }
 
-    public HashSet<Robot> getRobots() {
+    public TreeSet<Robot> getRobots() {
         return robots;
     }
 
-    public void setRobots(HashSet<Robot> robots) {
+    public void TreeSet(TreeSet<Robot> robots) {
         this.robots = robots;
     }
 
