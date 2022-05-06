@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
-
+!pragma layout smetana
 abstract Client
 class Membership
 class Platinum
@@ -111,9 +111,7 @@ class assignRobot{
 -HashSet <Robot> robotsAssigned
 -Request request
 
-+assignationPlatinum()
-+assignationOthers()
-
++assignation()
 
 'while Request.tareas != null
     'recorro robots: if(robot instanceOf tarea) --> resultado.add(Robot,tarea)
