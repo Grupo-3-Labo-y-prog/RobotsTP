@@ -4,7 +4,7 @@ import java.util.*;
 
 public class assignRobot {
     private Request request;
-    private TreeSet<Robot> robots; //listado de mis cinco robts
+    private TreeSet<Robot> robots = new TreeSet<Robot>(new QueueRequestComparator()); //listado de mis cinco robts
     private HashSet <Robot> robotsAssigned; //listado de robots asignados
 
     public assignRobot( TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
@@ -12,32 +12,52 @@ public class assignRobot {
         this.robotsAssigned = robotsAssigned;
     }
 
-    public HashSet assignationPlatinum (){
+    public HashSet assignation(Request request) {
 
-        //SIN TERMINAR (tengo que repensar el if porque no me gusta)
-        
-        if(request.getClient().getMembership().getType() == "Platinum"){
+        HashSet<Robot> capable = new HashSet<Robot>();
 
-            Iterator<Robot> it = robots.iterator();
-            Robot aux = it.next();
-            Robot fewerRequestQueue = aux;
+        if (request.getClient().getMembership().getType().equals("Platinum")) {
 
-            while (it.hasNext()){
-                aux = it.next();
-                if(aux.getRequests().size() < fewerRequestQueue.getRequests().size()){
-                    fewerRequestQueue = aux;
-                }
-            }
-            robotsAssigned.add(fewerRequestQueue);
+            return capable = capableRobots();
 
+        } else{
+            //ver si podemos pisar vector ordenado por cola de pedidos con el de costos.
+             this.robots = new TreeSet<Robot>(new CostComparator());
+                return capable = capableRobots();
         }
-        return robotsAssigned;
     }
 
+        public HashSet<Robot> capableRobots() {
+
+            ArrayList<Tasks> tareas = request.getRequestedTasks();
+            Iterator<Tasks> it = tareas.iterator();
+
+            while (it.hasNext()) {
+                Tasks keyTask = Tasks.valueOf(String.valueOf((it.next())));
+
+                TreeSet<Robot> tsRobot = robots;
+                Iterator<Robot> ts = tsRobot.iterator();
+
+                boolean assigned = false;
+                while (ts.hasNext() && !assigned) {
+
+                    Robot keyRobot = ts.next();
+
+                    if (keyRobot.implementsInterface(keyTask)) {
+                        this.robotsAssigned.add(keyRobot);
+                        assigned = true;
+                    }
+
+                }
+
+            }
+            return this.robotsAssigned;
+        }
 
 
 
-    public HashSet assignationOthers() {
+
+        public HashSet assignationOthers() {
 
         ArrayList<Tasks> tareas = request.getRequestedTasks();
         Iterator<Tasks> it = tareas.iterator();
