@@ -54,38 +54,4 @@ public class assignRobot {
             return this.robotsAssigned;
         }
 
-
-
-
-        public HashSet assignationOthers() {
-
-        ArrayList<Tasks> tareas = request.getRequestedTasks();
-        Iterator<Tasks> it = tareas.iterator();
-
-        while (it.hasNext()){
-            Tasks keyTask = Tasks.valueOf(String.valueOf((it.next())));
-
-            TreeSet<Robot> tsRobot = robots;
-            Iterator<Robot> ts = tsRobot.iterator();
-
-            boolean assigned = false;
-            while (ts.hasNext() && !assigned){
-
-                Robot keyRobot = ts.next();
-
-                if(keyRobot.implementsInterface(keyTask)){
-                    robotsAssigned.add(keyRobot);
-                    assigned = true;
-                }
-
-
-            }
-
-        }
-
-        return robotsAssigned;
-    }
-
-
-
 }
