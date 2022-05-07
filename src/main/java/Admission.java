@@ -6,60 +6,52 @@ public class Admission {
     private ArrayList<Request> rejectRequests;
     private Payment payment;
 
-    public void validMembership(Request request) {
+    public void validMembership(Request request) throws CantOrderingException, LimitException {
 
         Membership membership = request.getClient().getMembership();
-        Client client = request.getClient();
 
-        try {
-            this.canOrdering(request, membership);
-            this.limitOfCleaning(client, membership);
-            this.limitOfOrdering(client, membership);
-        } catch (CantOrderingException e) {
-            this.rejectRequests.add(request);
-            e.printStackTrace();
-        } catch (LimitException e) {
-            this.rejectRequests.add(request);
-            e.printStackTrace();
-        }
+        this.canOrdering(request, membership);
+        this.limitOfCleaning(request);
+        this.limitOfOrdering(request);
 
         this.approvedRequests.add(request);
 
     }
 
-    public void validDebt(Request request){
+    public void validDebt(Request request) throws LimitException {
 
-        try {
-            this.limitDebt(request.getClient());
-        } catch (LimitException e) {
-            e.printStackTrace();
-            this.rejectRequests.add(request);
-        }
+        this.limitDebt(request);
+
         this.approvedRequests.add(request);
     }
 
     private void canOrdering(Request request, Membership membership) throws CantOrderingException {
 
-        if (request.isOrdering() != membership.isCanOrder()){
+        if (/*request.isOrdering() != membership.isCanOrder()*/true){
+            this.addRejected(request);
             throw new CantOrderingException("membership owned does not include ordering");
+
         }
 
     }
 
-    private void limitOfCleaning(Client client, Membership membership) throws LimitException {
-        if (client.getCleaning() >= membership.getLimitClean()){
+    private void limitOfCleaning(Request request) throws LimitException {
+        if (request.getClient().getCleaning() >= request.getClient().getMembership().getLimitClean()){
+            this.addRejected(request);
             throw new LimitException("cleaning limit reached");
         }
     }
 
-    private void limitOfOrdering(Client client, Membership membership) throws LimitException {
-        if (client.getOrdering() >= membership.getLimitOrder()){
+    private void limitOfOrdering(Request request) throws LimitException {
+        if (request.getClient().getOrdering() >= request.getClient().getMembership().getLimitOrder()){
+            this.addRejected(request);
             throw new LimitException("order limit reached");
         }
     }
 
-    private void limitDebt(Client client) throws LimitException {
-        if (this.payment.getAmount(client.id) > client.getMembership().getLimitDebt()){
+    private void limitDebt(Request request) throws LimitException {
+        if (this.payment.getAmount(request.getClient().id) > request.getClient().getMembership().getLimitDebt()){
+            this.addRejected(request);
             throw new LimitException("the limit of the debt has been reached");
         }
     }
@@ -84,5 +76,9 @@ public class Admission {
         this.approvedRequests = approvedRequests;
         this.rejectRequests = rejectRequests;
         this.payment = payment;
+    }
+
+    private void addRejected(Request request){
+        this.rejectRequests.add(request);
     }
 }
