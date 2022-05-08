@@ -27,10 +27,13 @@ public class Admission {
 
     private void canOrdering(Request request, Membership membership) throws CantOrderingException {
 
-        if (/*request.isOrdering() != membership.isCanOrder()*/true){
-            this.addRejected(request);
-            throw new CantOrderingException("membership owned does not include ordering");
+        boolean askOrdering = request.getRequestedTasks().contains(Tasks.ORDERING);
+        if (askOrdering) {
+            if (askOrdering != membership.isCanOrder()) {
+                this.addRejected(request);
+                throw new CantOrderingException("membership owned does not include ordering");
 
+            }
         }
 
     }
@@ -80,5 +83,13 @@ public class Admission {
 
     private void addRejected(Request request){
         this.rejectRequests.add(request);
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

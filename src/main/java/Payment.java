@@ -6,10 +6,18 @@ public class Payment {
 
     public float getAmount (int ID){
 
-    return getAmount(ID);
+        return this.clients.get((Integer) ID).getAmount();
     }
 
     public Payment(HashMap<Integer, Debt> clients) {
+        this.clients = clients;
+    }
+
+    public HashMap<Integer, Debt> getClients() {
+        return clients;
+    }
+
+    public void setClients(HashMap<Integer, Debt> clients) {
         this.clients = clients;
     }
 }

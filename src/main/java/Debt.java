@@ -19,4 +19,8 @@ public class Debt{
       this.amount = amount;
    }
 
+   public Debt(int ID, float amount) {
+      this.ID = ID;
+      this.amount = amount;
+   }
 }

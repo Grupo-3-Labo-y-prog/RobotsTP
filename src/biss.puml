@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract Client
+class Client
 class Membership
 class Platinum
 class Classic
@@ -134,7 +134,7 @@ class Request{
 - tareas: List
 }
 
-abstract Client{
+class Client{
 -int ID
 -Membership
 -int ordering

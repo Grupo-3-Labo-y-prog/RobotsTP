@@ -1,5 +1,4 @@
 
-import sun.reflect.generics.tree.Tree;
 import java.util.*;
 
 public class assignRobot {
@@ -56,6 +55,7 @@ public class assignRobot {
                 if(keyRobot.implementsInterface(keyTask)){
                     robotsAssigned.add(keyRobot);
                     assigned = true;
+
                 }
 
 

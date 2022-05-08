@@ -40,7 +40,7 @@ public class Company {
     //done ---- a chequear
     public void update(Client c){
         if (clients.containsKey(c)){
-            if (request.isOrdering()){
+            if (true/*request.isOrdering()*/){
                 c.setOrdering(c.getOrdering() + 1);
             }
             c.setCleaning(c.getCleaning()+1);

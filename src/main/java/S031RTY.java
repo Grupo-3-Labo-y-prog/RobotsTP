@@ -1,4 +1,3 @@
-package rit;
 
 public class S031RTY extends Robot implements Ordering {
 
