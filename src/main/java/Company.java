@@ -5,10 +5,10 @@ import java.util.TreeSet;
 public class Company {
 
     private HashMap<Integer, Client> clients;
-    private TreeSet<Robot> robots;
+    private HashSet<Robot> robots;
     private Request request;
     private Admission admission;
-    //private AssingRobot assingRobot;
+    private AssignRobot assignRobot;
 
     //hacer constructor
     //mejorar + hacer excepciones
@@ -16,35 +16,33 @@ public class Company {
         try {
             admission.validMembership(this.request);
             admission.validDebt(this.request);
-            //admissionRequest();
-            //this.robots = assingRobot();
-            update(this.request.getClient());
-            print(this.request);
-        }catch (Exception e){ //hacer excepcion
+            this.robots = assignRobot.assignation(this.request);
+            update();
+            //print(this.request);
+        } /*catch () excepcion de limit para el debito y otra para la membrecia y ordenar{
+
+        }*/
+        catch (Exception e){ //excepcion generica
 
         }
     }
 
-    //done
-    /*public void admissionRequest(){
-        admission.validMembership(this.request);
-        admission.validDebt(this.request.getClient());
-    }*/
-    //a chequear
-    public TreeSet<Robot> assingRobot(){
-        //this.robot = SearchRobot();
-        //return robot
-
-        return this.robots;
-    }
-    //done ---- a chequear
-    public void update(Client c){
-        if (clients.containsKey(c)){
-            if (request.isOrdering()){
-                c.setOrdering(c.getOrdering() + 1);
+    //done ---- falta excepciones
+    public void update(){
+        try{
+            if(!clients.containsKey(this.request.getID())){
+                //throw new excepcion de cliente faltante
             }
-            c.setCleaning(c.getCleaning()+1);
+            Client cliente = this.clients.get(this.request.getClient().getId());
+            if (request.getRequestedTasks().contains(Tasks.ORDERING)){
+                cliente.setOrdering(cliente.getOrdering() + 1); //si cliente tiene 2 ordening, con el get los trae y le suma 1
+            }
+            cliente.setCleaning(cliente.getCleaning()+1);
+
+        } catch (Exception e){
+
         }
+
     }
     //aclarar mensaje de salida
     public void print(Request r){
@@ -59,11 +57,11 @@ public class Company {
         this.clients = clients;
     }
 
-    public TreeSet<Robot> getRobots() {
+    public HashSet<Robot> getRobots() {
         return robots;
     }
 
-    public void TreeSet(TreeSet<Robot> robots) {
+    public void TreeSet(HashSet<Robot> robots) {
         this.robots = robots;
     }
 
