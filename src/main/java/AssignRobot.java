@@ -1,13 +1,12 @@
 
-import sun.reflect.generics.tree.Tree;
 import java.util.*;
 
-public class assignRobot {
+public class AssignRobot {
     private Request request;
     private TreeSet<Robot> robots = new TreeSet<Robot>(new QueueRequestComparator()); //listado de mis cinco robts
     private HashSet <Robot> robotsAssigned; //listado de robots asignados
 
-    public assignRobot( TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
+    public AssignRobot(TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
         this.robots = robots;
         this.robotsAssigned = robotsAssigned;
     }
