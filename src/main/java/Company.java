@@ -11,8 +11,7 @@ public class Company {
     private AssignRobot assignRobot;
     //private Comunation comunation;
 
-    //hacer constructor
-    //mejorar + hacer excepciones
+    //falta comunicacion
     public void processRequest() throws CantOrderingException{
         try {
             admission.validMembership(this.request);
@@ -26,12 +25,12 @@ public class Company {
         catch (LimitException l){
             System.out.println(l.getMessage());
         }
-        catch (Exception e){ //excepcion generica
+        catch (Exception e){
             System.out.println("Hubo un error inesperado");
         }
     }
 
-    //done ---- falta excepciones
+    //done
     public void update(){
         try{
             if(!clients.containsKey(this.request.getID())){
@@ -46,10 +45,6 @@ public class Company {
             System.out.println(c.getMessage());
         }
 
-    }
-    //aclarar mensaje de salida
-    public void print(Request r){
-        //llama a la funcion comunicacion que hace diana
     }
 
     public HashMap<Integer, Client> getClients() {
