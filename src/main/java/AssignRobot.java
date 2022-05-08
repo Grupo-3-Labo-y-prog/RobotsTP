@@ -11,19 +11,19 @@ public class AssignRobot {
         this.robotsAssigned = robotsAssigned;
     }
 
-    public HashSet assignation(Request request) {
+    public HashSet assignation(Request request) throws MembershipDoesntExistException {
 
         HashSet<Robot> capable = new HashSet<Robot>();
-
         if (request.getClient().getMembership().getType().equals("Platinum")) {
-
             return capable = capableRobots();
-
-        } else{
-            //ver si podemos pisar vector ordenado por cola de pedidos con el de costos.
-             this.robots = new TreeSet<Robot>(new CostComparator());
-                return capable = capableRobots();
         }
+        if (request.getClient().getMembership().getType().equals("Economic") || request.getClient().getMembership().getType().equals("Classic")) {
+
+            this.robots = new TreeSet<Robot>(new CostComparator());
+            return capable = capableRobots();
+        }
+        else throw new MembershipDoesntExistException("membership does not exist");
+
     }
 
         public HashSet<Robot> capableRobots() {
@@ -40,10 +40,12 @@ public class AssignRobot {
                 boolean assigned = false;
                 while (ts.hasNext() && !assigned) {
 
-                    Robot keyRobot = ts.next();
+                    final Robot keyRobot = ts.next();
 
                     if (keyRobot.implementsInterface(keyTask)) {
                         this.robotsAssigned.add(keyRobot);
+                        Robot r = this.robots.stream().findAny().filter(p -> p.getModel() == keyRobot.getModel()).get();
+                        r.getRequests().add(this.request);
                         assigned = true;
                     }
 
