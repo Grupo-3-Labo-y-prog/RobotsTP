@@ -25,7 +25,7 @@ class AdmissionTest {
     void validMembership(){}
 
     @Test
-    void validMembershipEconomicWithOrdering() throws LimitException, CantOrderingException {
+    void validMembershipEconomicWithOrdering(){
         this.membership = new Economic();
         this.client = new Client(1111, this.membership, 0,0);
         ArrayList<Tasks> task = new ArrayList<Tasks>();

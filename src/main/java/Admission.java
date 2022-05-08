@@ -29,7 +29,7 @@ public class Admission {
 
         boolean askOrdering = request.getRequestedTasks().contains(Tasks.ORDERING);
         if (askOrdering) {
-            if (askOrdering != membership.isCanOrder()) {
+            if (askOrdering != membership.isCanOrder()){
                 this.addRejected(request);
                 throw new CantOrderingException("membership owned does not include ordering");
 
