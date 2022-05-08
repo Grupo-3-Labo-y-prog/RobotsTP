@@ -9,21 +9,25 @@ public class Company {
     private Request request;
     private Admission admission;
     private AssignRobot assignRobot;
+    //private Comunation comunation;
 
     //hacer constructor
     //mejorar + hacer excepciones
-    public void processRequest(){
+    public void processRequest() throws CantOrderingException{
         try {
             admission.validMembership(this.request);
             admission.validDebt(this.request);
             this.robots = assignRobot.assignation(this.request);
             update();
-            //print(this.request);
-        } /*catch () excepcion de limit para el debito y otra para la membrecia y ordenar{
-
-        }*/
+            //comunication.showMessage("Pedido valido");
+        } catch (CantOrderingException e){
+            System.out.println(e.getMessage());
+        }
+        catch (LimitException l){
+            System.out.println(l.getMessage());
+        }
         catch (Exception e){ //excepcion generica
-
+            System.out.println("Hubo un error inesperado");
         }
     }
 
@@ -31,16 +35,15 @@ public class Company {
     public void update(){
         try{
             if(!clients.containsKey(this.request.getID())){
-                //throw new excepcion de cliente faltante
+                throw new ClientNullException("No existe el cliente en la base");
             }
             Client cliente = this.clients.get(this.request.getClient().getId());
             if (request.getRequestedTasks().contains(Tasks.ORDERING)){
-                cliente.setOrdering(cliente.getOrdering() + 1); //si cliente tiene 2 ordening, con el get los trae y le suma 1
+                cliente.setOrdering(cliente.getOrdering() + 1);
             }
             cliente.setCleaning(cliente.getCleaning()+1);
-
-        } catch (Exception e){
-
+        } catch (ClientNullException c){
+            System.out.println(c.getMessage());
         }
 
     }

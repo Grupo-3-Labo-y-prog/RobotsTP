@@ -6,22 +6,14 @@ public class Admission {
     private ArrayList<Request> rejectRequests;
     private Payment payment;
 
-    public void validMembership(Request request) {
+    public void validMembership(Request request) throws CantOrderingException, LimitException {
 
         Membership membership = request.getClient().getMembership();
         Client client = request.getClient();
+        this.canOrdering(request, membership);
+        this.limitOfCleaning(client, membership);
+        this.limitOfOrdering(client, membership);
 
-        try {
-            this.canOrdering(request, membership);
-            this.limitOfCleaning(client, membership);
-            this.limitOfOrdering(client, membership);
-        } catch (CantOrderingException e) {
-            this.rejectRequests.add(request);
-            e.printStackTrace();
-        } catch (LimitException e) {
-            this.rejectRequests.add(request);
-            e.printStackTrace();
-        }
 
         this.approvedRequests.add(request);
 
