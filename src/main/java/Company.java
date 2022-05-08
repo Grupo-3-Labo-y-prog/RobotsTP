@@ -5,50 +5,46 @@ import java.util.TreeSet;
 public class Company {
 
     private HashMap<Integer, Client> clients;
-    private TreeSet<Robot> robots;
+    private HashSet<Robot> robots;
     private Request request;
     private Admission admission;
-    //private AssingRobot assingRobot;
+    private AssignRobot assignRobot;
+    //private Comunation comunation;
 
-    //hacer constructor
-    //mejorar + hacer excepciones
-    public void processRequest(){
+    //falta comunicacion
+    public void processRequest() throws CantOrderingException{
         try {
             admission.validMembership(this.request);
             admission.validDebt(this.request);
-            //admissionRequest();
-            //this.robots = assingRobot();
-            update(this.request.getClient());
-            print(this.request);
-        }catch (Exception e){ //hacer excepcion
-
+            this.robots = assignRobot.assignation(this.request);
+            update();
+            //comunication.showMessage("Pedido valido");
+        } catch (CantOrderingException e){
+            System.out.println(e.getMessage());
+        }
+        catch (LimitException l){
+            System.out.println(l.getMessage());
+        }
+        catch (Exception e){
+            System.out.println("Hubo un error inesperado");
         }
     }
 
     //done
-    /*public void admissionRequest(){
-        admission.validMembership(this.request);
-        admission.validDebt(this.request.getClient());
-    }*/
-    //a chequear
-    public TreeSet<Robot> assingRobot(){
-        //this.robot = SearchRobot();
-        //return robot
-
-        return this.robots;
-    }
-    //done ---- a chequear
-    public void update(Client c){
-        if (clients.containsKey(c)){
-            if (true/*request.isOrdering()*/){
-                c.setOrdering(c.getOrdering() + 1);
+    public void update(){
+        try{
+            if(!clients.containsKey(this.request.getID())){
+                throw new ClientNullException("No existe el cliente en la base");
             }
-            c.setCleaning(c.getCleaning()+1);
+            Client cliente = this.clients.get(this.request.getClient().getId());
+            if (request.getRequestedTasks().contains(Tasks.ORDERING)){
+                cliente.setOrdering(cliente.getOrdering() + 1);
+            }
+            cliente.setCleaning(cliente.getCleaning()+1);
+        } catch (ClientNullException c){
+            System.out.println(c.getMessage());
         }
-    }
-    //aclarar mensaje de salida
-    public void print(Request r){
-        //llama a la funcion comunicacion que hace diana
+
     }
 
     public HashMap<Integer, Client> getClients() {
@@ -59,11 +55,11 @@ public class Company {
         this.clients = clients;
     }
 
-    public TreeSet<Robot> getRobots() {
+    public HashSet<Robot> getRobots() {
         return robots;
     }
 
-    public void TreeSet(TreeSet<Robot> robots) {
+    public void TreeSet(HashSet<Robot> robots) {
         this.robots = robots;
     }
 
