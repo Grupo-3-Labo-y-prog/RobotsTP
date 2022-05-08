@@ -11,48 +11,47 @@ public class AssignRobot {
         this.robotsAssigned = robotsAssigned;
     }
 
-    public HashSet assignation(Request request) throws MembershipDoesntExistException {
+    public HashSet assignation(Request request){
 
         HashSet<Robot> capable = new HashSet<Robot>();
+
         if (request.getClient().getMembership().getType().equals("Platinum")) {
-            return capable = capableRobots();
+            capable = capableRobots();
         }
         if (request.getClient().getMembership().getType().equals("Economic") || request.getClient().getMembership().getType().equals("Classic")) {
-
             this.robots = new TreeSet<Robot>(new CostComparator());
-            return capable = capableRobots();
+            capable = capableRobots();
         }
-        else throw new MembershipDoesntExistException("membership does not exist");
-
+        return capable;
     }
 
-        public HashSet<Robot> capableRobots() {
+    public HashSet<Robot> capableRobots() {
 
-            ArrayList<Tasks> tareas = request.getRequestedTasks();
-            Iterator<Tasks> it = tareas.iterator();
+        ArrayList<Tasks> tareas = request.getRequestedTasks();
+        Iterator<Tasks> it = tareas.iterator();
 
-            while (it.hasNext()) {
-                Tasks keyTask = Tasks.valueOf(String.valueOf((it.next())));
+        while (it.hasNext()) {
+            Tasks keyTask = Tasks.valueOf(String.valueOf((it.next())));
 
-                TreeSet<Robot> tsRobot = robots;
-                Iterator<Robot> ts = tsRobot.iterator();
+            TreeSet<Robot> tsRobot = robots;
+            Iterator<Robot> ts = tsRobot.iterator();
 
-                boolean assigned = false;
-                while (ts.hasNext() && !assigned) {
+            boolean assigned = false;
+            while (ts.hasNext() && !assigned) {
 
-                    final Robot keyRobot = ts.next();
+                final Robot keyRobot = ts.next();
 
-                    if (keyRobot.implementsInterface(keyTask)) {
-                        this.robotsAssigned.add(keyRobot);
-                        Robot r = this.robots.stream().findAny().filter(p -> p.getModel() == keyRobot.getModel()).get();
-                        r.getRequests().add(this.request);
-                        assigned = true;
-                    }
-
+                if (keyRobot.implementsInterface(keyTask)) {
+                    this.robotsAssigned.add(keyRobot);
+                    Robot r = this.robots.stream().findAny().filter(p -> p.getModel() == keyRobot.getModel()).get();
+                    r.getRequests().add(this.request);
+                    assigned = true;
                 }
 
             }
-            return this.robotsAssigned;
+
         }
+        return this.robotsAssigned;
+    }
 
 }
