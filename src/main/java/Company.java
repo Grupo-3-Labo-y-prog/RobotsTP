@@ -70,4 +70,6 @@ public class Company {
     public void setRequest(Request request) {
         this.request = request;
     }
+
+
 }

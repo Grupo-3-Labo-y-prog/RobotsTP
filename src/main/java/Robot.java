@@ -47,6 +47,11 @@ public abstract class Robot {
 
     public abstract boolean implementsInterface(Tasks task);
 
-
-
+    @Override
+    public String toString() {
+        return "Robot:" +
+                "\n model='" + model + '\n' +
+                "\n surface='" + surface + '\n' +
+                "\n cost=" + cost;
+    }
 }

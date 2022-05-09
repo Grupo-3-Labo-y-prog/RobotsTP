@@ -16,7 +16,7 @@ class AdmissionTest {
     @BeforeEach
     void setUp() {
         this.client = new Client(1111, new Classic(), 0, 0);
-        this.request = new Request(222, this.client, new ArrayList<Tasks>(), new Simple());
+        this.request = new Request(222, this.client, new ArrayList<Tasks>(), new Simple(), "Maipu 1234");
         this.admission = new Admission(new ArrayList<Request>(), new ArrayList<Request>(), new Payment(new
                 HashMap<Integer, Debt>()));
     }
@@ -31,7 +31,7 @@ class AdmissionTest {
         ArrayList<Tasks> task = new ArrayList<Tasks>();
         task.add(Tasks.ORDERING);
         task.add(Tasks.CLEANING);
-        this.request = new Request(2222, this.client, task, new Simple());
+        this.request = new Request(2222, this.client, task, new Simple(), "Maipu 1234");
 
         assertThrows(CantOrderingException.class, () ->this.admission.validMembership(request));
     }

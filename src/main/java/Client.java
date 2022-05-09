@@ -5,6 +5,9 @@ public class Client {
     int ordering; //contador de los ordenamientos que pidio en ese mes
     int cleaning; //contador de las limpiezas que pidio en ese mes
 
+    public Client() {
+    }
+
     public int getId() {
         return id;
     }
