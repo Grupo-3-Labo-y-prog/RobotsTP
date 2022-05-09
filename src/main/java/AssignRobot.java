@@ -25,6 +25,7 @@ public class AssignRobot {
                 this.robots = new TreeSet<Robot>(new CostComparator());
                 capable = capableRobots();
             }
+            //chequear
             return capable;
         }
 
