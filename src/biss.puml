@@ -57,10 +57,12 @@ K311Yfu <|-- Polishing
 
 
 
-abstract Comunication{
-+printBill(Process)
-+printError(Error)
-input()
+Class Comunication{
+- int numberRequest = 0;
++printBill(Request, HashSet)
++Client receivesClient(int id)
++int receivesId()
++Request receivesRequest(Client)
 }
 
 abstract class Robot{

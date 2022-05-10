@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Company -> Comunication: Llama a la funcion receivesRequest
+Comunication -> Request: settea los datos
+
+
+
+@enduml
