@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Company -> Admission: validMembership(Request request)
+Admission -> Admission: canOrdering(Request request, Membership membership)
+/'Admission -> Request: getRequestTasks()
+Request --> Admission: ArrayList<Tasks>
+Admission -> Membership: isCanOrdering()
+Membership --> Admission: boolean'/
+Admission -> Admission: limitOfCleaning(Request request)
+/'Admission ->Request:getClient().getCleaning()
+Request --> Admission: int
+Admission -> Request: getClient().getMembership().getLimitCleaning()
+Request --> Admission: int'/
+Admission -> Admission: limitOfOrdering(Request request)
+/'Admission -> Request: getClient().getOrdering
+Request --> Admission: int
+Admission -> Request:getClient().getMembership.getLimitOrdering
+Request --> Admission:int'/
+Admission --> Company: Nothing if is OK
+Company -> Admission: validDebt(Request request)
+Admission -> Admission: limitDebt(Request request)
+Admission --> Company: Nothing if is OK
+@enduml

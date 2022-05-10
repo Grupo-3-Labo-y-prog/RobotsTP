@@ -37,6 +37,9 @@ class AdmissionTest {
     }
 
     @Test
+    void validMembershipOK(){}
+
+    @Test
     void validDebt() {
     }
 
