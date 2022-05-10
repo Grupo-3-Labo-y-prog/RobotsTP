@@ -10,7 +10,7 @@ public class AssignRobot {
         private HashSet<Robot> robotsAssigned; //listado de robots asignados
 
         public AssignRobot(TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
-            this.robots = new TreeSet<>(new CostComparator());
+            this.robots = new TreeSet<>(new QueueRequestComparator());
             this.robots.addAll(robots);
             this.robotsAssigned = robotsAssigned;
         }
@@ -20,11 +20,13 @@ public class AssignRobot {
             HashSet<Robot> capable = new HashSet<Robot>();
 
             if (request.getClient().getMembership().getType().equals("Platinum")) {
+                TreeSet <Robot> robotsAux = new TreeSet<>(new QueueRequestComparator());
+                robotsAux.addAll(this.robots);
                 capable = capableRobots();
             }
             if (request.getClient().getMembership().getType().equals("Economic") || request.getClient().getMembership().getType().equals("Classic")) {
-                TreeSet <Robot> robotsAux = new TreeSet<>(new CostComparator());
-                robotsAux.addAll(this.robots);
+                TreeSet <Robot> robotsAux2 = new TreeSet<>(new CostComparator());
+                robotsAux2.addAll(this.robots);
 
                 capable = capableRobots();
             }

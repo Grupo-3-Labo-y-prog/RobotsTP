@@ -8,7 +8,8 @@ import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class assignRobotTest {
-    Client client;
+    Client clientP;
+    Client clientC;
     TreeSet <Robot> robots;
     HashSet<Robot> robotsAssigned;
     AssignRobot aasignRobot;
@@ -16,13 +17,25 @@ class assignRobotTest {
 
     @BeforeEach
     void setUp(){
-        this.client = new Client(1111, new Classic(),0, 0);
+        this.clientP = new Client(1111, new Platinum(),0, 0);
+        this.clientC = new Client(1111, new Classic(),0, 0);
 
         Robot K311Ya = new K311Ya();
         Robot K311Yfu = new K311Yfu();
         Robot K311Yfl = new K311Yfl();
         Robot S031RTY = new S031RTY();
         Robot P011H = new P011H();
+
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        Request request = new Request(5,this.clientC, tasks, new Complex(), "Siempre viva 1234");
+        Request request2 = new Request(8,this.clientP, tasks, new Complex(), "Emilio Frers 2048, Martinez");
+        S031RTY.getRequests().add(request2);
+        S031RTY.getRequests().add(request2);
+        K311Yfu.getRequests().add(request);
+        K311Yfl.getRequests().add(request);
+        K311Ya.getRequests().add(request);
+
         TreeSet <Robot> robots = new TreeSet<>(new CostComparator());
 
         //los inserto en orden de mas barato a mas caro
@@ -54,7 +67,7 @@ class assignRobotTest {
         expected.add(K311Yfu);
         expected.add(S031RTY);
 
-        Request request = new Request(1,this.client, tasks, new Simple(), "Libertador 2231, Olivos");
+        Request request = new Request(1,this.clientC, tasks, new Simple(), "Libertador 2231, Olivos");
 
         assertEquals(expected,this.aasignRobot.assignation(request));
     }
@@ -69,12 +82,27 @@ class assignRobotTest {
 
         Robot K311Yfu = new K311Yfu();
 
-
         HashSet<Robot> expected = new HashSet<>();
         expected.add(K311Yfu);
 
 
-        Request request = new Request(8,this.client, tasks, new Complex(), "Emilio Frers 2048, Martinez");
+        Request request = new Request(8,this.clientC, tasks, new Complex(), "Emilio Frers 2048, Martinez");
+
+        assertEquals(expected, this.aasignRobot.assignation(request));
+
+    }
+
+
+    @Test
+    void assignRobotWithoutQeueToPlatinum (){
+
+        Robot K311Ya = new K311Ya();
+        HashSet<Robot> expected = new HashSet<>();
+        expected.add(K311Ya);
+
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        Request request = new Request(5,this.clientP, tasks, new Complex(), "Siempre viva 1234");
 
         assertEquals(expected, this.aasignRobot.assignation(request));
 
