@@ -37,6 +37,14 @@ class assignRobotTest {
         K311Yfl.getRequests().add(request);
         P011H.getRequests().add(request);
 
+        /* Para probar el Test onus 2 decomentar*/
+        S031RTY.getRequests().add(request2);
+        K311Yfu.getRequests().add(request2);
+        K311Yfl.getRequests().add(request);
+        K311Yfl.getRequests().add(request2);
+        K311Ya.getRequests().add(request);
+        K311Ya.getRequests().add(request2);
+
 
         TreeSet <Robot> robots = new TreeSet<>(new CostComparator());
         robots.add(K311Yfu);
@@ -108,6 +116,42 @@ class assignRobotTest {
     }
 
 
+    //Test Bonus 1: Un cliente Classic sin deuda pide limpieza, ordenamiento y lustrado y se le asignan los robots K311Yfu y S031RTY
+    @Test
+    void assignRobotMoreEconomicToClassicCleanningOrderingPolishing (){
+
+        Robot K311Yfu = new K311Yfu();
+        Robot S031RTY = new S031RTY();
+        HashSet<Robot> expected = new HashSet<>();
+        expected.add(K311Yfu);
+        expected.add(S031RTY);
+
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        tasks.add(Tasks.POLISHING);
+        Request request = new Request(2,this.clientC, tasks, new Complex(), "42 Wallaby Way, Sydney");
+
+        assertEquals(expected, this.aasignRobot.assignation(request));
+
+    }
 
 
+    //Test Bonus 2: Cliente patinum solicita limpieza y lustrado se le asigna Robot P011H porque aunque no tiene cero, es el que menos pedidos en cola tiene
+    //Para testearlo tuvimos que agregar pedidos en las colas de los robots, descomentar set up
+    @Test
+    void assignRobotWithoutQeueToPlatinum2 (){
+
+        Robot P011H = new P011H();
+        HashSet<Robot> expected = new HashSet<>();
+        expected.add(P011H);
+
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.POLISHING);
+        Request request = new Request(5,this.clientP, tasks, new Complex(), "17 Cherry Tree Lane");
+
+        assertEquals(expected, this.aasignRobot.assignation(request));
+
+    }
 }
