@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+Company -> AssignRobot: Enviamos request a AssignRobot
+AssignRobot -> Robot: Llama a Robot para copiar lista de Robots
+Robot --> AssignRobot: Devuelve la lista de pedidos
+participant Cleanning #99FF99
+AssignRobot -> Cleanning: Corrobora si implementa la interfaz
+Cleanning --> AssignRobot: Devuelve true o false
+participant Polishing #99FF99
+AssignRobot ->Polishing: Corrobora si implementa la interfaz
+Polishing --> AssignRobot: Devuelve true o false
+participant Ordering #99FF99
+AssignRobot ->Ordering: Corrobora si implementa la interfaz
+Ordering --> AssignRobot: Devuelve true o false
+AssignRobot --> Company: Envía listado de robots capaces
+
+@enduml
