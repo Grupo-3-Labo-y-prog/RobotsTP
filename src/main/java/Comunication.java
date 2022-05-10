@@ -98,7 +98,7 @@ public class Comunication {
             this.numberRequest++;
             request.setID(this.numberRequest);
         } catch (WrongAnswerException e) {
-            e.printStackTrace();
+            e.getMessage();
 
 
         }
