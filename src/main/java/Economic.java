@@ -7,5 +7,6 @@ public class Economic extends Membership{
 
     public Economic() {
         super(TYPE, LIMIT_DEBT, MAX_ORDER, MAX_CLEAN, CAN_ORDER);
+
     }
 }

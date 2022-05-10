@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Comunication {
@@ -51,10 +52,12 @@ public class Comunication {
         request.setClient(client);
 
         System.out.println("ingrese direccion:");
-        request.setAddress(buffer.nextLine());
+        String address = buffer.next();
+        request.setAddress(address);
 
         System.out.println("1 - Limpieza Simple | 2 - Limpieza Compleja ");
         int option = buffer.nextInt();
+
 
         try {
             if (option == 1) {
@@ -70,23 +73,23 @@ public class Comunication {
             tasks.add(Tasks.CLEANNING);
 
             System.out.println("Desea lustrar Si|No?");
-            String option2 = buffer.nextLine();
+            String option2 = buffer.next();
 
-            if (option2 != "Si" && option2 != "No"){
+            if (!Objects.equals(option2, "Si") && !Objects.equals(option2, "No")){
                 throw new WrongAnswerException("Opcion de lustrar es incorrecta");
             }
-            if (option2 == "Si") {
+            if (option2.equals("Si")) {
                 tasks.add(Tasks.POLISHING);
             }
 
 
             System.out.println("Desea ordenar Si|No?");
-            String option3 = buffer.nextLine();
-            if(option3 != "Si" && option3 != "No"){
+            String option3 = buffer.next();
+            if(!Objects.equals(option3, "Si") && !Objects.equals(option3, "No")){
                 throw new WrongAnswerException("Opcion de ordenamiento incorrecta");
             }
 
-            if (option3 == "Si") {
+            if (option3.equals("Si")) {
                 tasks.add(Tasks.ORDERING);
             }
 
