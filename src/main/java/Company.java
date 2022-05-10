@@ -11,8 +11,6 @@ public class Company {
     private AssignRobot assignRobot;
     private Comunication comunication;
 
-    //falta comunicacion
-
     public void takeRequest() throws ClientNullException{
         int id = comunication.receivesId();
         if(!this.clients.containsKey(id)){
@@ -28,7 +26,6 @@ public class Company {
             admission.validDebt(this.request);
             this.robots = assignRobot.assignation(this.request);
             update();
-            //comunication.showMessage("Pedido valido");
         } catch (CantOrderingException e){
             System.out.println(e.getMessage());
         }
