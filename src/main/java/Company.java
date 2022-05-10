@@ -9,9 +9,19 @@ public class Company {
     private Request request;
     private Admission admission;
     private AssignRobot assignRobot;
-    //private Comunation comunation;
+    private Comunication comunication;
 
     //falta comunicacion
+
+    public void takeRequest() throws ClientNullException{
+        int id = comunication.receivesId();
+        if(!this.clients.containsKey(id)){
+            Client clientNew = new Client();
+            clientNew = comunication.receivesClient(id);
+            clients.put(id, clientNew);
+        }
+    }
+
     public void processRequest() throws CantOrderingException{
         try {
             admission.validMembership(this.request);
