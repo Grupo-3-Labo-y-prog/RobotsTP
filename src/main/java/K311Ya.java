@@ -10,9 +10,10 @@ public class K311Ya extends Robot implements Ordering, Cleanning,Polishing {
         super(MODEL,SURFACE,COST);
     }
 
+
     @Override
     public boolean implementsInterface(Tasks task) {
-        return task.toString().equalsIgnoreCase(Ordering.class.getSimpleName()) && task.toString().equalsIgnoreCase(Polishing.class.getSimpleName())
-                && task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName());
+        return task.toString().equalsIgnoreCase(Polishing.class.getSimpleName()) || task.toString().equalsIgnoreCase(Ordering.class.getSimpleName())
+                || task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName());
     }
 }

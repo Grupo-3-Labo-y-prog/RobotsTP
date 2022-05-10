@@ -10,9 +10,11 @@ public class P011H extends Robot implements Cleanning,Polishing {
     public P011H() {
         super(MODEL, SURFACE, COST);
     }
+
+
     @Override
     public boolean implementsInterface(Tasks task) {
         return task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName())
-                && task.toString().equalsIgnoreCase(Polishing.class.getSimpleName());
+                || task.toString().equalsIgnoreCase(Polishing.class.getSimpleName());
     }
 }

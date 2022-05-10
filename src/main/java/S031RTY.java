@@ -12,6 +12,5 @@ public class S031RTY extends Robot implements Ordering {
     @Override
     public boolean implementsInterface(Tasks task) {
         return task.toString().equalsIgnoreCase(Ordering.class.getSimpleName()) ;
-
     }
 }

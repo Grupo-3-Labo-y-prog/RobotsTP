@@ -6,36 +6,39 @@ import java.util.TreeSet;
 public class AssignRobot {
 
         private Request request;
-        private TreeSet<Robot> robots = new TreeSet<Robot>(new QueueRequestComparator()); //listado de mis cinco robts
+        private TreeSet<Robot> robots ; //listado de mis cinco robts
         private HashSet<Robot> robotsAssigned; //listado de robots asignados
 
         public AssignRobot(TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
-            this.robots = robots;
+            this.robots = new TreeSet<>(new CostComparator());
+            this.robots.addAll(robots);
             this.robotsAssigned = robotsAssigned;
         }
 
         public HashSet assignation(Request request){
-
+            this.request = request;
             HashSet<Robot> capable = new HashSet<Robot>();
 
             if (request.getClient().getMembership().getType().equals("Platinum")) {
                 capable = capableRobots();
             }
             if (request.getClient().getMembership().getType().equals("Economic") || request.getClient().getMembership().getType().equals("Classic")) {
-                this.robots = new TreeSet<Robot>(new CostComparator());
+                TreeSet <Robot> robotsAux = new TreeSet<>(new CostComparator());
+                robotsAux.addAll(this.robots);
+
                 capable = capableRobots();
             }
-            //chequear
+
             return capable;
         }
 
         public HashSet<Robot> capableRobots() {
 
-            ArrayList<Tasks> tareas = request.getRequestedTasks();
+            ArrayList<Tasks> tareas = this.request.getRequestedTasks();
             Iterator<Tasks> it = tareas.iterator();
 
             while (it.hasNext()) {
-                Tasks keyTask = Tasks.valueOf(String.valueOf((it.next())));
+                Tasks keyTask = Tasks.valueOf(String.valueOf(it.next()));
 
                 TreeSet<Robot> tsRobot = robots;
                 Iterator<Robot> ts = tsRobot.iterator();
@@ -43,12 +46,12 @@ public class AssignRobot {
                 boolean assigned = false;
                 while (ts.hasNext() && !assigned) {
 
-                    final Robot keyRobot = ts.next();
+                    Robot keyRobot = ts.next();
 
                     if (keyRobot.implementsInterface(keyTask)) {
                         this.robotsAssigned.add(keyRobot);
-                        Robot r = this.robots.stream().findAny().filter(p -> p.getModel() == keyRobot.getModel()).get();
-                        r.getRequests().add(this.request);
+                        /*Robot r = this.robots.stream().findAny().filter(p -> p.getModel().equals(keyRobot.getModel())).get();
+                        r.getRequests().add(this.request);*/
                         assigned = true;
                     }
 

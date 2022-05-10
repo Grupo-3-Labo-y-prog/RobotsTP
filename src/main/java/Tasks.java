@@ -1,7 +1,7 @@
 
 
 public enum Tasks {
-    CLEANING,
+    CLEANNING,
     ORDERING,
     POLISHING
 }

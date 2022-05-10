@@ -30,7 +30,7 @@ class AdmissionTest {
         this.client = new Client(1111, this.membership, 0,0);
         ArrayList<Tasks> task = new ArrayList<Tasks>();
         task.add(Tasks.ORDERING);
-        task.add(Tasks.CLEANING);
+        task.add(Tasks.CLEANNING);
         this.request = new Request(2222, this.client, task, new Simple(), "Maipu 1234");
 
         assertThrows(CantOrderingException.class, () ->this.admission.validMembership(request));

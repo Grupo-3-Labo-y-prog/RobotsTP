@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -68,7 +67,7 @@ public class Comunication {
             }
 
             ArrayList<Tasks> tasks = new ArrayList<>();
-            tasks.add(Tasks.CLEANING);
+            tasks.add(Tasks.CLEANNING);
 
             System.out.println("Desea lustrar Si|No?");
             String option2 = buffer.nextLine();
