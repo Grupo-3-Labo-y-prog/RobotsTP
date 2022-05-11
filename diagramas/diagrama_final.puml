@@ -1,16 +1,15 @@
 @startuml
 'https://plantuml.com/class-diagram
-
+!pragma layout smetana
 class Client
 class Membership
 class Platinum
 class Classic
 class Economic
 class Request
-class TypeClean
-class Surface
-class floor
-class furniture
+abstract class TypeClean
+class Simplex
+class Complex
 class Admission
 class Company
 class assignRobot
@@ -37,24 +36,22 @@ Company *-- Robot
 Company *-- Request
 Request *-- Client
 Request *-- TypeClean
-Request *---Surface
-Surface<|-- floor
-Surface<|-- furniture
+TypeClean <-- Simplex
+TypeClean <-- Complex
 Robot <|--- K311Ya
 Robot <|---S031RTY
 Robot <|---P011H
 Robot <|---K311Yfu
 Robot <|--- K311Yfl
-K311Yfl <|-- Cleanning
-K311Ya <|-- Cleanning
-K311Ya <|-- Polishing
-K311Ya <|-- Ordering
-S031RTY <|-- Ordering
-P011H <|-- Polishing
-P011H <|-- Cleanning
-K311Yfu <|-- Cleanning
-K311Yfu <|-- Polishing
-
+K311Yfl <|.. Cleanning
+K311Ya <|.. Cleanning
+K311Ya <|..Polishing
+K311Ya <|.. Ordering
+S031RTY <|.. Ordering
+P011H <|.. Polishing
+P011H <|.. Cleanning
+K311Yfu <|.. Cleanning
+K311Yfu <|.. Polishing
 
 
 Class Comunication{
@@ -66,29 +63,27 @@ Class Comunication{
 }
 
 abstract class Robot{
-'-String model
-'-String surface
-'-boolean canOrder
-'-boolean canShine
--int cost
--Collection requests
+-String model;
+-String surface;
+-int cost;
+-LinkedHashSet <Request> requests;
+-boolean implementsInterface(Tasks task);
 
 }
 
 class Company{
 
--HashMap clients
--TreeSet robots
--Robot
--Request
--Admission admission
--HashSet assignRobot
+- HashMap<Integer, Client> clients;
+    - HashSet<Robot> robots;
+    - Request request;
+    - Admission admission;
+    - AssignRobot assignRobot;
+    - Comunication comunication;
 
 'llama a admission
-+void process(Request)
++void takeRequest() throws ClientNullException
++void processRequest() throws CantOrderingException
 +void update()
-+void print()
-
 
 }
 
@@ -102,19 +97,21 @@ class Admission{
 'ej: pedir un ordenamiento cuando no puede
 +boolean validMembership(Request)
 +boolean validDebt(Client)
-+String verified(Request)
++ void canOrdering(Request)
++void limitOfCleaning(Request)
++void limitOfOrdering(Request)
 
 
 }
 
 
 class assignRobot{
--TreeSet<Robot> robots
--HashSet <Robot> robotsAssigned
--Request request
+-Request request;
+-ArrayList<Robot> robots ; //listado de mis cinco robts
+-HashSet<Robot> robotsAssigned;
 
-+assignationPlatinum()
-+assignationOthers()
++HashSet assignation(Request)
++HashSet<Robot> capableRobots(TreeSet<Robot>)
 
 
 'while Request.tareas != null
@@ -131,10 +128,10 @@ class Request{
 -int ID
 -Client
 -TypeClean
--Surface surface
-'-String address?
-- tareas: List
+-ArrayList <Tasks> requestedTasks;
+-String address
 }
+
 
 class Client{
 -int ID
