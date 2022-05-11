@@ -29,15 +29,15 @@ Client *-- Membership
 Membership <|-- Platinum
 Membership <|-- Classic
 Membership <|-- Economic
-Company <-- Admission
-Company <-- assignRobot
-Company <- Comunication
+Company *-- Admission
+Company *-- assignRobot
+Company *- Comunication
 Company *-- Robot
 Company *-- Request
 Request *-- Client
 Request *-- TypeClean
-TypeClean <-- Simplex
-TypeClean <-- Complex
+TypeClean <|-- Simplex
+TypeClean <|-- Complex
 Robot <|--- K311Ya
 Robot <|---S031RTY
 Robot <|---P011H
@@ -52,7 +52,13 @@ P011H <|.. Polishing
 P011H <|.. Cleanning
 K311Yfu <|.. Cleanning
 K311Yfu <|.. Polishing
+Admission *-- Payment
+Payment o-- Debt
 
+class Debt{
+- int ID;
+- float amount;
+}
 
 Class Comunication{
 - int numberRequest = 0;
@@ -69,6 +75,10 @@ abstract class Robot{
 -LinkedHashSet <Request> requests;
 -boolean implementsInterface(Tasks task);
 
+}
+
+class Payment{
+-HashMap<Integer,Debt> clients
 }
 
 class Company{
