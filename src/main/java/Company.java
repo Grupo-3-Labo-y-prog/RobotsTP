@@ -11,16 +11,18 @@ public class Company {
     private AssignRobot assignRobot;
     private Comunication comunication;
 
-    public void takeRequest() throws ClientNullException{
+    public void takeRequest(){
         int id = comunication.receivesId();
-        if(!this.clients.containsKey(id)){
-            Client clientNew = new Client();
-            clientNew = comunication.receivesClient(id);
-            clients.put(id, clientNew);
+        Client clientRequest = this.clients.get(id);
+        if(clientRequest.equals(null)){
+            clientRequest = comunication.receivesClient(id);
         }
+        clients.put(clientRequest.getId(), clientRequest);
+        this.request =  comunication.receivesRequest(clientRequest);
     }
 
-    public void processRequest() throws CantOrderingException{
+    public void processRequest(){
+        takeRequest();
         try {
             admission.validMembership(this.request);
             admission.validDebt(this.request);
