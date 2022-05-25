@@ -1,8 +1,22 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+activate Company
 
-Company -> Comunication: Llama a la funcion receivesRequest
-Comunication -> Request: settea los datos
+Company -> Comunication: Llama a la funcion receivesID()
+activate Comunication
+Comunication --> Company: recibe un ID de cliente
+deactivate Comunication
+
+Company -> Comunication: receivesClient(ID)
+activate Comunication
+Comunication --> Company: recibe un Client Nuevo
+deactivate Comunication
+
+Company -> Comunication: receivesRequest(Client)
+activate Comunication
+Comunication -> Request: settea
+Comunication --> Company: recibe un Request
+deactivate Comunication
 
 
 

@@ -37,14 +37,14 @@ class assignRobotTest {
         K311Yfl.getRequests().add(request);
         P011H.getRequests().add(request);
 
-        /* Para probar el Test onus 2 decomentar*/
+        /* Para probar el Test bonus 2 decomentar
         S031RTY.getRequests().add(request2);
         K311Yfu.getRequests().add(request2);
         K311Yfl.getRequests().add(request);
         K311Yfl.getRequests().add(request2);
         K311Ya.getRequests().add(request);
         K311Ya.getRequests().add(request2);
-
+*/
 
         TreeSet <Robot> robots = new TreeSet<>(new CostComparator());
         robots.add(K311Yfu);
