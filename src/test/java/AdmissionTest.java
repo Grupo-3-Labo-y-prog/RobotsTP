@@ -8,6 +8,7 @@ import Memberships.Economic;
 import Memberships.Membership;
 import PaymentDB.Debt;
 import PaymentDB.Payment;
+import Services.Complex;
 import Services.Simple;
 import Services.Tasks;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,9 +29,9 @@ class AdmissionTest {
     @BeforeEach
     void setUp() {
         this.client = new Client(1111, new Classic(), 0, 0);
-        this.request = new Request(222, this.client, new ArrayList<Tasks>(), new Simple(), "Maipu 1234");
-        this.admission = new Admission(new ArrayList<Request>(), new ArrayList<Request>(), new Payment(new
-                HashMap<Integer, Debt>()));
+        this.request = new Request(222, this.client, new ArrayList<>(), new Simple(), "Maipu 1234");
+        this.admission = new Admission(new ArrayList<>(), new ArrayList<>(), new Payment(new
+                HashMap<>()));
     }
 
     @Test
@@ -46,6 +47,29 @@ class AdmissionTest {
         this.request = new Request(2222, this.client, task, new Simple(), "Maipu 1234");
 
         assertThrows(CantOrderingException.class, () ->this.admission.validMembership(request));
+    }
+
+    @Test
+    void validMembershipEconomicThrowsLimitEx(){
+        this.membership =  new Economic();
+        this.client = new Client(1212, this.membership, 0,3);
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        this.request = new Request(3333, this.client, tasks, new Complex(), "Maipu 1234");
+
+        assertThrows(LimitException.class, () ->this.admission.validMembership(this.request));
+    }
+
+    @Test
+    void validMembershipThrowsLimitEx(){
+        this.membership =  new Classic();
+        this.client = new Client(1212, this.membership, 3,0);
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        this.request = new Request(3333, this.client, tasks, new Complex(), "Maipu 1234");
+
+        assertThrows(LimitException.class, () ->this.admission.validMembership(this.request));
     }
 
     @Test
