@@ -1,0 +1,16 @@
+startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Company -> Company: llama a takeRequest() dentro de Company
+
+Company -> Admission: llama a validMembership(Request)
+Company -> Admission: llama a validDebt(Request)
+
+Company -> Robot: llama a assingRobot(Request)
+Robot --> Company: devuelve un Robot
+
+Company -> Company: llama a Update() para actualizar el cliente
+
+@enduml
