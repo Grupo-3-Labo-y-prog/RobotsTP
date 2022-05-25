@@ -1,10 +1,16 @@
+import Comunications.Comunication;
+import Entities.Client;
+import Entities.Request;
+import Memberships.Economic;
+import Services.Simple;
+import Services.Tasks;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ComunicationTest {
     Client client;
