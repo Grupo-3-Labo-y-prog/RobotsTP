@@ -4,18 +4,34 @@
 autonumber
 
 
-Company -> AssignRobot: Enviamos request a AssignRobot
-AssignRobot -> Robot: Llama a Robot para copiar lista de Robots
-Robot --> AssignRobot: Devuelve la lista de pedidos
-participant Cleanning #99FF99
-AssignRobot -> Cleanning: Corrobora si implementa la interfaz
-Cleanning --> AssignRobot: Devuelve true o false
-participant Polishing #99FF99
-AssignRobot ->Polishing: Corrobora si implementa la interfaz
-Polishing --> AssignRobot: Devuelve true o false
-participant Ordering #99FF99
-AssignRobot ->Ordering: Corrobora si implementa la interfaz
-Ordering --> AssignRobot: Devuelve true o false
-AssignRobot --> Company: Envía listado de robots capaces
+Title: Method Assignation
+participant Company  #ffdd99
+participant AssignRobot #ffdd99
+
+Company -> AssignRobot: AssignRobot.Assignation(request)
+
+participant Robot #ffdd99
+
+AssignRobot -> Robot: Assignation(request)
+note right of AssignRobot
+Armamos TreeSet ordenado
+según criterio necesario
+end note
+
+Robot --> AssignRobot: TreeSet<Robots>
+participant Cleanning << (I, #ffb3ff  >> #ccffcc
+AssignRobot -> Cleanning: keyRobot.implementsInterface(Cleanning)
+Cleanning --> AssignRobot:true o false
+participant Polishing << (I, #ffb3ff  >> #ccffcc
+AssignRobot ->Polishing: keyRobot.implementsInterface(Polishing)
+Polishing --> AssignRobot: true o false
+participant Ordering << (I, #ffb3ff  >> #ccffcc
+AssignRobot ->Ordering: keyRobot.implementsInterface(Ordering)
+Ordering --> AssignRobot: true o false
+note left AssignRobot
+Devuelve HashSet de
+Robots Asignados
+end note
+AssignRobot --> Company: HashSet <Robot>
 
 @enduml

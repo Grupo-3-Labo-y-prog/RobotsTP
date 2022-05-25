@@ -14,7 +14,7 @@ import java.util.TreeSet;
 public class AssignRobot {
 
         private Request request;
-        private ArrayList<Robot> robots ; //listado de mis cinco robts
+        private ArrayList<Robot> robots ; //listado de mis cinco robots
         private HashSet<Robot> robotsAssigned; //listado de robots asignados
 
         public AssignRobot(TreeSet<Robot> robots, HashSet<Robot> robotsAssigned) {
