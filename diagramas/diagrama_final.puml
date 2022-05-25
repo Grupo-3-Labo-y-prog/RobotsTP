@@ -124,12 +124,12 @@ class assignRobot{
 +HashSet<Robot> capableRobots(TreeSet<Robot>)
 
 
-'while Request.tareas != null
-    'recorro robots: if(robot instanceOf tarea) --> resultado.add(Robot,tarea)
+'while Entities.Request.tareas != null
+    'recorro robots: if(robot instanceOf tarea) --> resultado.add(Robots.Robot,tarea)
     'itero a la siguiente tarea
-    'si el robot siguiente puede hacer la otra tarea: if(robot instanceOf tarea) --> resultado.add(Robot,tarea) /se va a pisar en el mismo robot la segunda tarea (como es tree no se duplica el robot y asumo que ambas tareas la hace un solo robot. Por ahora solo asigno uno
-    'else (robot !instanceOf tarea)- voy al sig robot y así sucesivamente hasta que encuentro otro robot --> resultado.add(Robot,tarea)
-    'Aca se va a crear otro nodo de Robot voy a tener dos elementos en resultado: resultado(1): Robot XXX/LIMPIEZA - Robot YYY/ ORDENAM etc.
+    'si el robot siguiente puede hacer la otra tarea: if(robot instanceOf tarea) --> resultado.add(Robots.Robot,tarea) /se va a pisar en el mismo robot la segunda tarea (como es tree no se duplica el robot y asumo que ambas tareas la hace un solo robot. Por ahora solo asigno uno
+    'else (robot !instanceOf tarea)- voy al sig robot y así sucesivamente hasta que encuentro otro robot --> resultado.add(Robots.Robot,tarea)
+    'Aca se va a crear otro nodo de Robots.Robot voy a tener dos elementos en resultado: resultado(1): Robots.Robot XXX/LIMPIEZA - Robots.Robot YYY/ ORDENAM etc.
     'voy a retornar el hashMap resultado y al iterarlo voy a saber que robots asigne
 }
 

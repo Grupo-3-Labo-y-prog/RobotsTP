@@ -1,6 +1,15 @@
+import Bussiness.AssignRobot;
+import Comparators.CostComparator;
+import Entities.Client;
+import Entities.Request;
+import Memberships.Classic;
+import Memberships.Platinum;
+import Robots.*;
+import Services.Complex;
+import Services.Simple;
+import Services.Tasks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -38,12 +47,12 @@ class assignRobotTest {
         P011H.getRequests().add(request);
 
         /* Para probar el Test bonus 2 decomentar
-        S031RTY.getRequests().add(request2);
-        K311Yfu.getRequests().add(request2);
-        K311Yfl.getRequests().add(request);
-        K311Yfl.getRequests().add(request2);
-        K311Ya.getRequests().add(request);
-        K311Ya.getRequests().add(request2);
+        Robots.S031RTY.getRequests().add(request2);
+        Robots.K311Yfu.getRequests().add(request2);
+        Robots.K311Yfl.getRequests().add(request);
+        Robots.K311Yfl.getRequests().add(request2);
+        Robots.K311Ya.getRequests().add(request);
+        Robots.K311Ya.getRequests().add(request2);
 */
 
         TreeSet <Robot> robots = new TreeSet<>(new CostComparator());
@@ -58,8 +67,8 @@ class assignRobotTest {
 
     }
 
-    //punto 2: Un cliente Classic, sin deuda, realiza un pedido de limpieza y ordenamiento. Se le asigna el robot
-    //K311Y-fl y el robot S031RTY ya que el K311Y-a es más costoso.
+    //punto 2: Un cliente Memberships.Classic, sin deuda, realiza un pedido de limpieza y ordenamiento. Se le asigna el robot
+    //K311Y-fl y el robot Robots.S031RTY ya que el K311Y-a es más costoso.
     //(OJO! Cambiamos K311Y-fl por el K311Y-fu porque esa sería la opción mas económica)
     @Test
     void assignRobotMoreEconomicToClassicClientCleanningOrdering (){
@@ -79,7 +88,7 @@ class assignRobotTest {
         assertEquals(expected,this.aasignRobot.assignation(request));
     }
     
-    //Punto 3. Un cliente Classic, sin deuda, realiza un pedido de limpieza y lustrado de muebles. Se le asigna el robot K311Y-fl y el robot K311Y-fu.
+    //Punto 3. Un cliente Memberships.Classic, sin deuda, realiza un pedido de limpieza y lustrado de muebles. Se le asigna el robot K311Y-fl y el robot K311Y-fu.
     //(OJITO! Solo debería asignar el robot K311fu ya que puede hacer ambas tareas y es el mas económico)
     @Test
      void assignRobotMoreEconomicToClassicClientCleanningPolishing (){
@@ -98,8 +107,8 @@ class assignRobotTest {
 
     }
 
-    //Punto 5: Un cliente Platinum realiza un pedido y se le asigna el robot K311Y-a ya que no tiene pedidos.
-    //(Todos los robots salvo el K311Ya fueron inicializados con pedidos en la fn SetUp)
+    //Punto 5: Un cliente Memberships.Platinum realiza un pedido y se le asigna el robot K311Y-a ya que no tiene pedidos.
+    //(Todos los robots salvo el Robots.K311Ya fueron inicializados con pedidos en la fn SetUp)
     @Test
     void assignRobotWithoutQeueToPlatinum (){
 
@@ -116,7 +125,7 @@ class assignRobotTest {
     }
 
 
-    //Test Bonus 1: Un cliente Classic sin deuda pide limpieza, ordenamiento y lustrado y se le asignan los robots K311Yfu y S031RTY
+    //Test Bonus 1: Un cliente Memberships.Classic sin deuda pide limpieza, ordenamiento y lustrado y se le asignan los robots Robots.K311Yfu y Robots.S031RTY
     @Test
     void assignRobotMoreEconomicToClassicCleanningOrderingPolishing (){
 
@@ -137,7 +146,7 @@ class assignRobotTest {
     }
 
 
-    //Test Bonus 2: Cliente patinum solicita limpieza y lustrado se le asigna Robot P011H porque aunque no tiene cero, es el que menos pedidos en cola tiene
+    //Test Bonus 2: Cliente patinum solicita limpieza y lustrado se le asigna Robots.Robot Robots.P011H porque aunque no tiene cero, es el que menos pedidos en cola tiene
     //Para testearlo tuvimos que agregar pedidos en las colas de los robots, descomentar set up
     @Test
     void assignRobotWithoutQeueToPlatinum2 (){

@@ -92,14 +92,14 @@ class Admission{
 class SearchRobot{
 
 -HashMap<String,Robot> robots
-'-Request
+'-Entities.Request
 
 'llama a la funcion selectRobot y recibe el robot ideal
 + Robot suitableRobot(Request)
 'recibe un request y realiza una iteracion
 'en la colleccion robots donde compara los requerimientos
 + Robot selectRobot(Request, String surface)
-'si es Platinum compara la cola que tiene con un min y se guarda la key
+'si es Memberships.Platinum compara la cola que tiene con un min y se guarda la key
 'si es el primero se fija si es null y lo asigna
 + String compareRequests(Robot)
 'si no es platinum compara el costo con un min y guarda la key para devolverla
