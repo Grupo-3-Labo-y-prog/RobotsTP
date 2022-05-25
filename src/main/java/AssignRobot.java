@@ -34,7 +34,7 @@ public class AssignRobot {
             return capable;
         }
 
-        public HashSet<Robot> capableRobots(TreeSet<Robot> robots) {
+        public HashSet<Robot> capableRobots(TreeSet<Robot> robotsAux) {
 
             ArrayList<Tasks> tareas = this.request.getRequestedTasks();
             Iterator<Tasks> it = tareas.iterator();
@@ -42,7 +42,7 @@ public class AssignRobot {
             while (it.hasNext()) {
                 Tasks keyTask = Tasks.valueOf(String.valueOf(it.next()));
 
-                Iterator<Robot> ts = robots.iterator();
+                Iterator<Robot> ts = robotsAux.iterator();
 
                 boolean assigned = false;
                 while (ts.hasNext() && !assigned) {
@@ -51,8 +51,11 @@ public class AssignRobot {
 
                     if (keyRobot.implementsInterface(keyTask)) {
                         this.robotsAssigned.add(keyRobot);
-                        /*Robot r = this.robots.stream().findAny().filter(p -> p.getModel().equals(keyRobot.getModel())).get();
-                        r.getRequests().add(this.request);*/
+
+                        int index = this.robots.indexOf(keyRobot);
+
+                        this.robots.get(index).getRequests().add(this.request);
+
                         assigned = true;
                     }
 
