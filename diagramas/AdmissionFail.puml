@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title: Cliente Classic con limite de ordenamiento
+
+Company -> Admission: validMembership(Request request)
+Admission -> Admission: canOrdering(Request request, Membership membership)
+Admission -> Admission: limitOfCleaning(Request request)
+Admission -> Admission: limitOfOrdering(Request request)
+Admission -> LimitException
+Admission --> Company:LimitException.class
+
+
+
+@enduml
