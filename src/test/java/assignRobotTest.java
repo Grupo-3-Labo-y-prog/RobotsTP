@@ -21,7 +21,7 @@ class assignRobotTest {
     Client clientC;
     TreeSet <Robot> robots;
     HashSet<Robot> robotsAssigned;
-    AssignRobot aasignRobot;
+    AssignRobot assignRobot;
 
 
     @BeforeEach
@@ -46,6 +46,12 @@ class assignRobotTest {
         K311Yfl.getRequests().add(request);
         P011H.getRequests().add(request);
 
+        S031RTY.setCapableTasks();
+        K311Yfu.setCapableTasks();
+        K311Yfl.setCapableTasks();
+        P011H.setCapableTasks();
+        K311Ya.setCapableTasks();
+
         /* Para probar el Test bonus 2 decomentar
         Robots.S031RTY.getRequests().add(request2);
         Robots.K311Yfu.getRequests().add(request2);
@@ -62,8 +68,9 @@ class assignRobotTest {
         robots.add(S031RTY);
         robots.add(K311Ya);
 
+
         this.robots = robots;
-        this.aasignRobot = new AssignRobot(this.robots, new HashSet<>());
+        this.assignRobot = new AssignRobot(this.robots, new HashSet<>());
 
     }
 
@@ -85,7 +92,7 @@ class assignRobotTest {
 
         Request request = new Request(1,this.clientC, tasks, new Simple(), "Libertador 2231, Olivos");
 
-        assertEquals(expected,this.aasignRobot.assignation(request));
+        assertEquals(expected,this.assignRobot.assignation(request));
     }
     
     //Punto 3. Un cliente Memberships.Classic, sin deuda, realiza un pedido de limpieza y lustrado de muebles. Se le asigna el robot K311Y-fl y el robot K311Y-fu.
@@ -103,7 +110,7 @@ class assignRobotTest {
 
         Request request = new Request(8,this.clientC, tasks, new Complex(), "Emilio Frers 2048, Martinez");
 
-        assertEquals(expected, this.aasignRobot.assignation(request));
+        assertEquals(expected, this.assignRobot.assignation(request));
 
     }
 
@@ -120,7 +127,7 @@ class assignRobotTest {
         tasks.add(Tasks.CLEANNING);
         Request request = new Request(5,this.clientP, tasks, new Complex(), "Siempre viva 1234");
 
-        assertEquals(expected, this.aasignRobot.assignation(request));
+        assertEquals(expected, this.assignRobot.assignation(request));
 
     }
 
@@ -141,7 +148,7 @@ class assignRobotTest {
         tasks.add(Tasks.POLISHING);
         Request request = new Request(2,this.clientC, tasks, new Complex(), "42 Wallaby Way, Sydney");
 
-        assertEquals(expected, this.aasignRobot.assignation(request));
+        assertEquals(expected, this.assignRobot.assignation(request));
 
     }
 
@@ -160,7 +167,7 @@ class assignRobotTest {
         tasks.add(Tasks.POLISHING);
         Request request = new Request(5,this.clientP, tasks, new Complex(), "17 Cherry Tree Lane");
 
-        assertEquals(expected, this.aasignRobot.assignation(request));
+        assertEquals(expected, this.assignRobot.assignation(request));
 
     }
 }

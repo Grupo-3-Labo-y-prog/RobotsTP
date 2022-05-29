@@ -2,7 +2,7 @@ package Robots;
 
 import Entities.Request;
 import Services.Tasks;
-
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
@@ -11,13 +11,20 @@ public abstract class Robot{
     private String surface;
     private int cost;
     private LinkedHashSet <Request> requests;
+    private ArrayList<Tasks> capableTasks;
 
     public Robot(String model, String surface, int cost) {
         this.model = model;
         this.surface = surface;
         this.cost = cost;
         this.requests = new LinkedHashSet<Request>();
+        this.capableTasks = new ArrayList<>();
     }
+
+    public ArrayList<Tasks> getCapableTasks() {
+        return capableTasks;
+    }
+    public abstract void setCapableTasks();
 
     public String getModel() {
         return model;
@@ -51,9 +58,6 @@ public abstract class Robot{
         this.requests = requests;
     }
 
-    public abstract boolean implementsInterface(Tasks task);
-
-
     @Override
     public String toString() {
         return "Robots.Robot:" +
@@ -74,4 +78,5 @@ public abstract class Robot{
     public int hashCode() {
         return Objects.hash(model);
     }
+
 }

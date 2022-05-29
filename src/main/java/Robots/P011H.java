@@ -1,24 +1,28 @@
 package Robots;
-
-import Services.Cleanning;
-import Services.Polishing;
 import Services.Tasks;
+import java.util.ArrayList;
 
-public class P011H extends Robot implements Cleanning, Polishing {
+public class P011H extends Robot{
 
-    private final static String MODEL = "Robots.P011H";
+    private final static String MODEL = "P011H";
     private final static String SURFACE = "Floor";
     private final static int COST = 1500;
+
+    private ArrayList<Tasks> capableTasks = new ArrayList<>();
 
 
     public P011H() {
         super(MODEL, SURFACE, COST);
     }
 
-
     @Override
-    public boolean implementsInterface(Tasks task) {
-        return task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName())
-                || task.toString().equalsIgnoreCase(Polishing.class.getSimpleName());
+    public void setCapableTasks() {
+        this.capableTasks.add(Tasks.CLEANNING);
+        this.capableTasks.add(Tasks.POLISHING);
     }
+
+    public ArrayList<Tasks> getCapableTasks() {
+        return capableTasks;
+    }
+
 }

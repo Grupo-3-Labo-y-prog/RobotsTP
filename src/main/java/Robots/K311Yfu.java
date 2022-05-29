@@ -1,21 +1,27 @@
 package Robots;
-
-import Services.Cleanning;
-import Services.Polishing;
 import Services.Tasks;
+import java.util.ArrayList;
 
-public class K311Yfu extends Robot implements Cleanning, Polishing {
-    private final static String MODEL = "Robots.K311Yfu";
+public class K311Yfu extends Robot {
+    private final static String MODEL = "K311Y-fu";
     private final static String SURFACE = "Furniture";
     private final static int COST = 500;
+    private ArrayList<Tasks> capableTasks = new ArrayList<>();
 
 
     public K311Yfu() {
         super(MODEL,SURFACE,COST);
     }
+
+
     @Override
-    public boolean implementsInterface(Tasks task) {
-        return task.toString().equalsIgnoreCase(Polishing.class.getSimpleName())
-                || task.toString().equalsIgnoreCase(Cleanning.class.getSimpleName());
+    public void setCapableTasks() {
+        this.capableTasks.add(Tasks.CLEANNING);
+        this.capableTasks.add(Tasks.POLISHING);
     }
+
+    public ArrayList<Tasks> getCapableTasks() {
+        return capableTasks;
+    }
+
 }
