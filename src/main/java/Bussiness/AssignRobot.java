@@ -57,7 +57,7 @@ public class AssignRobot {
 
                     if (keyRobot.getCapableTasks().contains(keyTask)) {
                         this.robotsAssigned.add(keyRobot);
-                        enqueueRobotsTasks(keyRobot);
+                        enqueueRobotsRequests(keyRobot);
 
                         assigned = true;
                     }
@@ -67,7 +67,7 @@ public class AssignRobot {
             return this.robotsAssigned;
         }
 
-    public void enqueueRobotsTasks (Robot keyRobot){
+    public void enqueueRobotsRequests (Robot keyRobot){
         int index = this.robots.indexOf(keyRobot);
         this.robots.get(index).getRequests().add(this.request);
     }
