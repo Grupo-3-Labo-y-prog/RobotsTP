@@ -154,22 +154,14 @@ final static int LIMIT_DEBT
 }
 
 class K311Yfl{
-limpiar: interface
 }
 class K311Yfu{
-limpiar: interface
-lustrar: interface
 }
 class P011H{
-limpiar: interface
-lustrar: interface
 }
 class S031RTY{
-ordenar: interface
 }
 class K311Ya{
-limpiar: interface
-ordenar: interface
-lustrar: interface
+
 }
 @enduml
