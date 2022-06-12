@@ -2,6 +2,7 @@ package Bussiness;
 
 import Comunications.Comunication;
 import Entities.Client;
+import Entities.Employee;
 import Entities.Request;
 import Exceptions.CantOrderingException;
 import Exceptions.ClientNullException;
@@ -16,6 +17,7 @@ public class Company {
 
     private HashMap<Integer, Client> clients;
     private HashSet<Robot> robots;
+    private HashSet<Employee> employees;
     private Request request;
     private Admission admission;
     private AssignRobot assignRobot;
