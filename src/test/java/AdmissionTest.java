@@ -28,19 +28,29 @@ class AdmissionTest {
 
     @BeforeEach
     void setUp() {
-        this.client = new Client(1111, new Classic(), 0, 0);
+        this.client = new Client(1111, new Classic(), 0, 0, new ArrayList<>());
         this.request = new Request(222, this.client, new ArrayList<>(), new Simple(), "Maipu 1234");
         this.admission = new Admission(new ArrayList<>(), new ArrayList<>(), new Payment(new
                 HashMap<>()));
     }
 
     @Test
-    void validMembership(){}
+    void validMembership(){
+
+        this.membership = new Classic();
+        this.client = new Client(1515, this.membership, 0,0,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.ORDERING);
+        tasks.add(Tasks.CLEANNING);
+        this.request = new Request(4545, this.client,tasks, new Simple(), "avmaipu1212");
+
+        assertDoesNotThrow(()-> this.admission.validMembership(this.request));
+    }
 
     @Test
     void validMembershipEconomicWithOrdering(){
         this.membership = new Economic();
-        this.client = new Client(1111, this.membership, 0,0);
+        this.client = new Client(1111, this.membership, 0,0, new ArrayList<>());
         ArrayList<Tasks> task = new ArrayList<Tasks>();
         task.add(Tasks.ORDERING);
         task.add(Tasks.CLEANNING);
@@ -52,7 +62,7 @@ class AdmissionTest {
     @Test
     void validMembershipEconomicThrowsLimitEx(){
         this.membership =  new Economic();
-        this.client = new Client(1212, this.membership, 0,3);
+        this.client = new Client(1212, this.membership, 0,3, new ArrayList<>());
         ArrayList<Tasks> tasks = new ArrayList<>();
         tasks.add(Tasks.CLEANNING);
         this.request = new Request(3333, this.client, tasks, new Complex(), "Maipu 1234");
@@ -63,7 +73,7 @@ class AdmissionTest {
     @Test
     void validMembershipThrowsLimitEx(){
         this.membership =  new Classic();
-        this.client = new Client(1212, this.membership, 3,0);
+        this.client = new Client(1212, this.membership, 3,0, new ArrayList<>());
         ArrayList<Tasks> tasks = new ArrayList<>();
         tasks.add(Tasks.CLEANNING);
         tasks.add(Tasks.ORDERING);
@@ -74,6 +84,9 @@ class AdmissionTest {
 
     @Test
     void validDebt() {
+        this.client.setMembership(new Classic());
+        this.admission.getPayment().getClients().put(this.client.getId(), new Debt(this.client.getId(), 0));
+        assertDoesNotThrow(()-> this.admission.validDebt(this.request));
     }
 
     @Test

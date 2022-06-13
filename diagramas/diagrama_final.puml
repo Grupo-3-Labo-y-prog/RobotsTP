@@ -15,9 +15,6 @@ class Company
 class assignRobot
 class Payment
 abstract class Robot
-interface Ordering
-interface Cleanning
-interface Polishing
 class K311Yfl
 class K311Yfu
 class P011H
@@ -38,20 +35,11 @@ Request *-- Client
 Request *-- TypeClean
 TypeClean <|-- Simplex
 TypeClean <|-- Complex
-Robot <|--- K311Ya
-Robot <|---S031RTY
-Robot <|---P011H
-Robot <|---K311Yfu
-Robot <|--- K311Yfl
-K311Yfl <|.. Cleanning
-K311Ya <|.. Cleanning
-K311Ya <|..Polishing
-K311Ya <|.. Ordering
-S031RTY <|.. Ordering
-P011H <|.. Polishing
-P011H <|.. Cleanning
-K311Yfu <|.. Cleanning
-K311Yfu <|.. Polishing
+Robot <|-- K311Ya
+Robot <|--S031RTY
+Robot <|--P011H
+Robot <|--K311Yfu
+Robot <|-- K311Yfl
 Admission *-- Payment
 Payment o-- Debt
 
@@ -73,7 +61,7 @@ abstract class Robot{
 -String surface;
 -int cost;
 -LinkedHashSet <Request> requests;
--boolean implementsInterface(Tasks task);
+-ArrayList<Tasks> capableTasks;
 
 }
 
@@ -166,22 +154,14 @@ final static int LIMIT_DEBT
 }
 
 class K311Yfl{
-limpiar: interface
 }
 class K311Yfu{
-limpiar: interface
-lustrar: interface
 }
 class P011H{
-limpiar: interface
-lustrar: interface
 }
 class S031RTY{
-ordenar: interface
 }
 class K311Ya{
-limpiar: interface
-ordenar: interface
-lustrar: interface
+
 }
 @enduml

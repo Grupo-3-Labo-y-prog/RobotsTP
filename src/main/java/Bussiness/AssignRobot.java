@@ -23,7 +23,7 @@ public class AssignRobot {
             this.robotsAssigned = robotsAssigned;
         }
 
-        public HashSet assignation(Request request){
+        public HashSet<Robot> assignation(Request request){
             this.request = request;
             HashSet<Robot> capable = new HashSet<Robot>();
 
@@ -46,34 +46,31 @@ public class AssignRobot {
 
             ArrayList<Tasks> tareas = this.request.getRequestedTasks();
             Iterator<Tasks> it = tareas.iterator();
+            Iterator<Robot> ts = robotsAux.iterator();
+            Robot keyRobot= ts.next();
 
             while (it.hasNext()) {
                 Tasks keyTask = Tasks.valueOf(String.valueOf(it.next()));
 
-                Iterator<Robot> ts = robotsAux.iterator();
-
                 boolean assigned = false;
                 while (ts.hasNext() && !assigned) {
 
-                    Robot keyRobot = ts.next();
-
-                    if (keyRobot.implementsInterface(keyTask)) {
+                    if (keyRobot.getCapableTasks().contains(keyTask)) {
                         this.robotsAssigned.add(keyRobot);
-
-                        int index = this.robots.indexOf(keyRobot);
-
-                        this.robots.get(index).getRequests().add(this.request);
+                        enqueueRobotsRequests(keyRobot);
 
                         assigned = true;
                     }
-
+                    else {keyRobot = ts.next();};
                 }
-
             }
             return this.robotsAssigned;
         }
 
-
+    public void enqueueRobotsRequests (Robot keyRobot){
+        int index = this.robots.indexOf(keyRobot);
+        this.robots.get(index).getRequests().add(this.request);
     }
+}
 
 
