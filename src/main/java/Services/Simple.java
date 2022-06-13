@@ -1,4 +1,4 @@
-package Entities.Services;
+package Services;
 
 public class Simple implements TypeClean {
 

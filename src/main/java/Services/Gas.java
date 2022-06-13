@@ -2,24 +2,27 @@ package Services;
 
 import Entities.Employee;
 
-public class Electricity extends Service{
+public class Gas extends Service{
 
-    public Electricity(int complexity, Employee employee) {
+    public Gas(int complexity, Employee employee) {
         super(complexity, employee);
     }
+
 
     @Override
     public float setCost() {
         float value = 0;
         if (super.getComplexity() < 3){
-            value = 2000;
+            value = 1000;
         }
         else if (super.getComplexity() <= 6){
-            value = 4573;
+            value = 3530;
         }
         else {
-            value = 7359;
+            value = 6389;
         }
         return value;
     }
+
+
 }

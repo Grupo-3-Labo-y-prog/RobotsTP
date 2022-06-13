@@ -8,7 +8,7 @@ public abstract class Service {
 
     private Employee employee;
     private float cost;
-    private  float price;
+    private float price;
 
     public Service(int complexity, Employee employee) {
         this.complexity = complexity;
@@ -32,10 +32,10 @@ public abstract class Service {
     }
 
 
-    public abstract float setCost();a
+    public abstract float setCost();
 
-    public  float setPrice(){
-       return this.cost + (this.employee.getSalary() /160) * this.complexity;
+    public float setPrice() {
+        return (float) (this.cost + (this.employee.getSalary() / 160) * this.complexity);
     }
 
     public float getCost() {
@@ -45,3 +45,4 @@ public abstract class Service {
     public float getPrice() {
         return price;
     }
+}

@@ -1,4 +1,4 @@
-package Entities.Services;
+package Services;
 
 interface TypeClean {
     void getCost();
