@@ -1,4 +1,13 @@
 package Services;
 
-public class Complex extends TypeClean{
+public class Complex implements TypeClean {
+    @Override
+    public void getCost() {
+
+    }
+
+    @Override
+    public void getPrice() {
+
+    }
 }

@@ -1,7 +1,5 @@
 package Services;
 
 public enum Waste {
-    MUD,
-
-    DUST
+    MUD, DUST
 }

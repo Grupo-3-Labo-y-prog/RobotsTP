@@ -1,4 +1,7 @@
 package Services;
 
-public abstract class TypeClean {
+interface TypeClean {
+    void getCost();
+
+    void getPrice();
 }
