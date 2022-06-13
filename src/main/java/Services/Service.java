@@ -31,7 +31,6 @@ public abstract class Service {
         this.employee = employee;
     }
 
-
     public abstract float setCost();
 
     public float setPrice() {
