@@ -8,7 +8,7 @@ import java.util.*;
 
 import static Services.Waste.MUD;
 
-public class Request {
+public class Request implements TypeClean{
     private int ID;
     private Client client;
     private ArrayList<Tasks> requestedTasks;
@@ -26,15 +26,34 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Entities.Request:" +
-                "\n ID=" + ID +
-                "\n client=" + client +
-                "\n requestedTasks=" + showTask() +
-                "\n cleaning=" + typeCleanning +
-                "\n address='" + address + '\n';
+        return "Request{" +
+                "ID=" + ID +
+                ", client=" + client +
+                ", requestedTasks=" + requestedTasks +
+                ", requestedServices=" + requestedServices +
+                ", typeCleanning=" + typeCleanning +
+                ", address='" + address + '\'' +
+                ", wastes=" + wastes +
+                ", pets=" + pets +
+                ", lastCleanning=" + lastCleanning +
+                ", price=" + price +
+                '}';
     }
 
     public Request() {
+    }
+
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, ArrayList<Service> requestedServices, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning, float price) {
+        this.ID = ID;
+        this.client = client;
+        this.requestedTasks = requestedTasks;
+        this.requestedServices = requestedServices;
+        this.typeCleanning = getTypeCleanning();
+        this.address = address;
+        this.wastes = wastes;
+        this.pets = pets;
+        this.lastCleanning = lastCleanning;
+        this.price = price;
     }
 
     public String getAddress() {
@@ -45,13 +64,6 @@ public class Request {
         this.address = address;
     }
 
-    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean cleaning, String address) {
-        this.ID = ID;
-        this.client = client;
-        this.requestedTasks = requestedTasks;
-        this.typeCleanning = cleaning;
-        this.address = address;
-    }
 
     public int getID() {
         return ID;
@@ -154,11 +166,17 @@ public class Request {
         this.lastCleanning = lastCleanning;
     }
 
-    public float getPrice() {
-        return price;
-    }
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    @Override
+    public void getCost() {
+
+    }
+    @Override
+    public void getPrice() {
+
     }
 }

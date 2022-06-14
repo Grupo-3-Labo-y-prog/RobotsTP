@@ -1,6 +1,6 @@
 package Services;
 
-interface TypeClean {
+public interface TypeClean {
     void getCost();
 
     void getPrice();
