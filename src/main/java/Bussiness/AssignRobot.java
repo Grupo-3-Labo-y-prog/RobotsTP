@@ -38,7 +38,6 @@ public class AssignRobot {
 
                 capable = capableRobots(robotsAux2);
             }
-
             return capable;
         }
 

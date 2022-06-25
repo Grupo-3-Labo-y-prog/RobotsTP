@@ -1,5 +1,6 @@
 package Entities;
 
+import Robots.Robot;
 import Services.*;
 
 import java.time.LocalDate;
@@ -8,21 +9,18 @@ import java.util.*;
 
 import static Services.Waste.MUD;
 
-public class Request implements TypeClean{
+public class Request {
     private int ID;
     private Client client;
     private ArrayList<Tasks> requestedTasks;
     private ArrayList<Service> requestedServices;
     private TypeClean typeCleanning;
     private String address;
-
     private TreeSet<Waste> wastes;
-
     private int pets;
-
     private LocalDate lastCleanning;
-
     private float price;
+    private HashSet <Robot> robotsAssigned;
 
     @Override
     public String toString() {
@@ -109,30 +107,7 @@ public class Request implements TypeClean{
         return message.toString();
     }
 
-    public int findDifference(LocalDate start_date, LocalDate end_date) {
 
-        Duration diff = Duration.between(start_date.atStartOfDay(), end_date.atStartOfDay());
-        return (int) diff.toDays();
-    }
-
-    public int DaysDiference() {
-
-        LocalDate start_date = this.lastCleanning;
-        LocalDate end_date = LocalDate.now();
-
-        return findDifference(start_date, end_date);
-    }
-
-    public void setTypeClean() {
-
-        this.typeCleanning = new Simple();
-
-        if (DaysDiference() >= 15 || this.pets > 1 || this.wastes.contains(MUD)) {
-
-            this.typeCleanning = new Complex();
-        }
-
-    }
 
     public ArrayList<Service> getRequestedServices() {
         return requestedServices;
@@ -166,17 +141,32 @@ public class Request implements TypeClean{
         this.lastCleanning = lastCleanning;
     }
 
-
-    public void setPrice(float price) {
+    public void setCost(float price) {
         this.price = price;
     }
 
-    @Override
-    public void getCost() {
+    private void getCostService(){
+
 
     }
-    @Override
-    public void getPrice() {
 
+    private float getCostTypeClean() {
+        return this.typeCleanning.getCost();
+    }
+
+    public HashSet<Robot>getRobotsAssigned() {
+        return robotsAssigned;
+    }
+
+    public void setRobotsAssigned(HashSet<Robot> robotsAssigned) {
+        this.robotsAssigned = robotsAssigned;
+    }
+
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean typeCleanning, String address) {
+        this.ID = ID;
+        this.client = client;
+        this.requestedTasks = requestedTasks;
+        this.typeCleanning = typeCleanning;
+        this.address = address;
     }
 }

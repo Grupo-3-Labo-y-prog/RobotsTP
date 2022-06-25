@@ -5,9 +5,15 @@ import Exceptions.CantOrderingException;
 import Exceptions.LimitException;
 import Memberships.Membership;
 import PaymentDB.Payment;
+import Services.Complex;
+import Services.Simple;
 import Services.Tasks;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static Services.Waste.MUD;
 
 public class Admission {
 
@@ -23,15 +29,12 @@ public class Admission {
         this.limitOfCleaning(request);
         this.limitOfOrdering(request);
 
-        this.approvedRequests.add(request);
-
     }
 
     public void validDebt(Request request) throws LimitException {
 
         this.limitDebt(request);
 
-        this.approvedRequests.add(request);
     }
 
     private void canOrdering(Request request, Membership membership) throws CantOrderingException {
@@ -100,5 +103,31 @@ public class Admission {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public int findDifference(LocalDate start_date, LocalDate end_date) {
+
+        Duration diff = Duration.between(start_date.atStartOfDay(), end_date.atStartOfDay());
+        return (int) diff.toDays();
+    }
+
+    public int DaysDiference(Request request) {
+
+        LocalDate start_date = request.getLastCleanning();
+        LocalDate end_date = LocalDate.now();
+
+        return findDifference(start_date, end_date);
+    }
+
+    public void setTypeClean(Request request) {
+
+        if (DaysDiference(request) >= 15 || request.getPets() > 1 || request.getWastes().contains(MUD)) {
+
+            request.setTypeCleanning(new Complex()); ;
+        }
+        else {
+            request.setTypeCleanning(new Simple());
+        }
+
     }
 }

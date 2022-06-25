@@ -1,6 +1,5 @@
 package Bussiness;
 
-import Comunications.Comunication;
 import Entities.Client;
 import Entities.Employee;
 import Entities.Request;
@@ -21,16 +20,9 @@ public class Company {
     private Request request;
     private Admission admission;
     private AssignRobot assignRobot;
-    private Comunication comunication;
+
 
     public void takeRequest(){
-        int id = comunication.receivesId();
-        Client clientRequest = this.clients.get(id);
-        if(clientRequest.equals(null)){
-            clientRequest = comunication.receivesClient(id);
-        }
-        clients.put(clientRequest.getId(), clientRequest);
-        this.request =  comunication.receivesRequest(clientRequest);
     }
 
     public void processRequest(){
@@ -62,6 +54,8 @@ public class Company {
                 cliente.setOrdering(cliente.getOrdering() + 1);
             }
             cliente.setCleaning(cliente.getCleaning()+1);
+            this.request.setRobotsAssigned(this.robots);
+            this.admission.getApprovedRequests().add(this.request);
         } catch (ClientNullException c){
             System.out.println(c.getMessage());
         }
