@@ -109,30 +109,7 @@ public class Request implements TypeClean{
         return message.toString();
     }
 
-    public int findDifference(LocalDate start_date, LocalDate end_date) {
 
-        Duration diff = Duration.between(start_date.atStartOfDay(), end_date.atStartOfDay());
-        return (int) diff.toDays();
-    }
-
-    public int DaysDiference() {
-
-        LocalDate start_date = this.lastCleanning;
-        LocalDate end_date = LocalDate.now();
-
-        return findDifference(start_date, end_date);
-    }
-
-    public void setTypeClean() {
-
-        this.typeCleanning = new Simple();
-
-        if (DaysDiference() >= 15 || this.pets > 1 || this.wastes.contains(MUD)) {
-
-            this.typeCleanning = new Complex();
-        }
-
-    }
 
     public ArrayList<Service> getRequestedServices() {
         return requestedServices;
@@ -178,5 +155,13 @@ public class Request implements TypeClean{
     @Override
     public void getPrice() {
 
+    }
+
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean typeCleanning, String address) {
+        this.ID = ID;
+        this.client = client;
+        this.requestedTasks = requestedTasks;
+        this.typeCleanning = typeCleanning;
+        this.address = address;
     }
 }
