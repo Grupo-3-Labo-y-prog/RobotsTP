@@ -8,15 +8,14 @@ import java.util.Random;
 public class Complex implements TypeClean {
     @Override
     public float getCost() {
-        Random claseRandom = new Random();
-        int randomInt = claseRandom.nextInt(2, 5);
+        int randomInt = (int)(Math.random()*5+2);
         float sum = (float) 0.0;
         ArrayList<Robot> robots = new ArrayList<>();
         Iterator iterator = robots.iterator();
         while (iterator.hasNext()) {
             Robot robot = (Robot) iterator.next();
             sum += robot.getCost() * randomInt;
-            randomInt = claseRandom.nextInt(2, 5);
+            randomInt = (int)(Math.random()*5+2);
         }
         return sum ;
     }
