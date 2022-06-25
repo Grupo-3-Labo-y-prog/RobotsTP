@@ -1,5 +1,6 @@
 package Entities;
 
+import Robots.Robot;
 import Services.*;
 
 import java.time.LocalDate;
@@ -8,21 +9,18 @@ import java.util.*;
 
 import static Services.Waste.MUD;
 
-public class Request implements TypeClean{
+public class Request {
     private int ID;
     private Client client;
     private ArrayList<Tasks> requestedTasks;
     private ArrayList<Service> requestedServices;
     private TypeClean typeCleanning;
     private String address;
-
     private TreeSet<Waste> wastes;
-
     private int pets;
-
     private LocalDate lastCleanning;
-
     private float price;
+    private HashSet <Robot> robotsAssigned;
 
     @Override
     public String toString() {
@@ -143,18 +141,25 @@ public class Request implements TypeClean{
         this.lastCleanning = lastCleanning;
     }
 
-
-    public void setPrice(float price) {
+    public void setCost(float price) {
         this.price = price;
     }
 
-    @Override
-    public void getCost() {
+    private void getCostService(){
+
 
     }
-    @Override
-    public void getPrice() {
 
+    private float getCostTypeClean() {
+        return this.typeCleanning.getCost();
+    }
+
+    public HashSet<Robot>getRobotsAssigned() {
+        return robotsAssigned;
+    }
+
+    public void setRobotsAssigned(HashSet<Robot> robotsAssigned) {
+        this.robotsAssigned = robotsAssigned;
     }
 
     public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean typeCleanning, String address) {

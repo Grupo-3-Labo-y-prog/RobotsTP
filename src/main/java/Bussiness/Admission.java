@@ -29,15 +29,12 @@ public class Admission {
         this.limitOfCleaning(request);
         this.limitOfOrdering(request);
 
-        this.approvedRequests.add(request);
-
     }
 
     public void validDebt(Request request) throws LimitException {
 
         this.limitDebt(request);
 
-        this.approvedRequests.add(request);
     }
 
     private void canOrdering(Request request, Membership membership) throws CantOrderingException {

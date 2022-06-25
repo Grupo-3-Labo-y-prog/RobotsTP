@@ -54,6 +54,8 @@ public class Company {
                 cliente.setOrdering(cliente.getOrdering() + 1);
             }
             cliente.setCleaning(cliente.getCleaning()+1);
+            this.request.setRobotsAssigned(this.robots);
+            this.admission.getApprovedRequests().add(this.request);
         } catch (ClientNullException c){
             System.out.println(c.getMessage());
         }
