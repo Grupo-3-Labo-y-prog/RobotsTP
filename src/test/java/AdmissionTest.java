@@ -30,7 +30,7 @@ class AdmissionTest {
     void setUp() {
         this.client = new Client(1111, new Classic(), 0, 0, new ArrayList<>());
         this.request = new Request(222, this.client, new ArrayList<>(), new Simple(), "Maipu 1234");
-        this.admission = new Admission(new ArrayList<>(), new ArrayList<>(), new Payment(new
+        this.admission = new Admission(new HashMap<>(), new ArrayList<>(), new Payment(new
                 HashMap<>()));
     }
 
