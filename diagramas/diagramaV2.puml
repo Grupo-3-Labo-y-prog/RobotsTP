@@ -24,13 +24,12 @@ abstract class Service
 class Electricity
 class Gas
 class Employee
-class Reports
+class Report
 
 Client *-- Membership
 Membership <|-- Platinum
 Membership <|-- Classic
 Membership <|-- Economic
-Company *- Comunication
 Company *-- Request
 Request *-- Client
 Request *-- TypeClean
@@ -71,10 +70,10 @@ class Request{
 - TreeSet <Waste>
 - int pets
 - Date lastCleanning
-- float price
+- float cost
 
 - setTypeClean()
-+getPrice()
+
 }
 
 
@@ -106,9 +105,9 @@ final static int LIMIT_DEBT
 }
 
 abstract class Service{
-- int complexity
--Employee employee
-+ getPrice()
+- int complexity // Simple <= 4 > Compleja
+- Employee employee
+- float cost
 + getCost()
 }
 
@@ -124,14 +123,15 @@ class Gas{
 
 }
 
-class Reports {
+class Report {
++ typeCleanningsQuantities(Arraylist<Request>request)
++ costByClient(Arraylist<Request>request, int IdCliente)
++ requestCost(Arraylist<Request>request, int IdRequest)
 
 }
 
 interface TypeClean{
 +getCost()
-+getPrice()
-
 }
 
 

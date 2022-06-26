@@ -21,6 +21,6 @@ public class Electricity extends Service{
             value = 7359;
         }
 
-        return value;
+       return (float)( value + (getEmployee().getSalaryPerHour()  * getComplexity()));
     }
 }

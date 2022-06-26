@@ -19,7 +19,7 @@ public class Request {
     private TreeSet<Waste> wastes;
     private int pets;
     private LocalDate lastCleanning;
-    private float price;
+    private float cost;
     private HashSet <Robot> robotsAssigned;
 
     @Override
@@ -34,14 +34,14 @@ public class Request {
                 ", wastes=" + wastes +
                 ", pets=" + pets +
                 ", lastCleanning=" + lastCleanning +
-                ", price=" + price +
+                ", price=" + cost +
                 '}';
     }
 
     public Request() {
     }
 
-    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, ArrayList<Service> requestedServices, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning, float price) {
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, ArrayList<Service> requestedServices, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning, float cost) {
         this.ID = ID;
         this.client = client;
         this.requestedTasks = requestedTasks;
@@ -51,7 +51,7 @@ public class Request {
         this.wastes = wastes;
         this.pets = pets;
         this.lastCleanning = lastCleanning;
-        this.price = price;
+        this.cost = cost;
     }
 
     public String getAddress() {
@@ -141,12 +141,20 @@ public class Request {
         this.lastCleanning = lastCleanning;
     }
 
-    public void setCost(float price) {
-        this.price = price;
+    public void setCost(float cost) {
+        this.cost = cost;
     }
 
-    private void getCostService(){
+    private float getCostService(){
+        Iterator<Service> it = this.requestedServices.iterator();
+        Service aux = it.next();
+        float amount = 0;
 
+        while (it.hasNext()){
+            amount += aux.getCost();
+        }
+
+        return amount;
 
     }
 

@@ -9,6 +9,7 @@ public class Gas extends Service{
     }
 
 
+
     @Override
     public float setCost() {
         float value = 0;
@@ -21,7 +22,7 @@ public class Gas extends Service{
         else {
             value = 6389;
         }
-        return value;
+        return (float)( value + (getEmployee().getSalaryPerHour()  * getComplexity()));
     }
 
 
