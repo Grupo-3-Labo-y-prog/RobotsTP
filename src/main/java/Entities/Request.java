@@ -145,6 +145,10 @@ public class Request {
         this.cost = cost;
     }
 
+    public float getCost(){
+        return this.getCostService() + this.getCostTypeClean();
+    }
+
     private float getCostService(){
         Iterator<Service> it = this.requestedServices.iterator();
         Service aux = it.next();
