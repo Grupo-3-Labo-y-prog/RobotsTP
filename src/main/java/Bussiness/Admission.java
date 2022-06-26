@@ -12,12 +12,13 @@ import Services.Tasks;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static Services.Waste.MUD;
 
 public class Admission {
 
-    private ArrayList<Request> approvedRequests;
+    private HashMap<Integer,Request> approvedRequests;
     private ArrayList<Request> rejectRequests;
     private Payment payment;
 
@@ -71,11 +72,11 @@ public class Admission {
         }
     }
 
-    public ArrayList<Request> getApprovedRequests() {
+    public HashMap<Integer, Request> getApprovedRequests() {
         return approvedRequests;
     }
 
-    public void setApprovedRequests(ArrayList<Request> approvedRequests) {
+    public void setApprovedRequests(HashMap<Integer, Request> approvedRequests) {
         this.approvedRequests = approvedRequests;
     }
 
@@ -87,7 +88,7 @@ public class Admission {
         this.rejectRequests = rejectRequests;
     }
 
-    public Admission(ArrayList<Request> approvedRequests, ArrayList<Request> rejectRequests, Payment payment) {
+    public Admission(HashMap<Integer,Request> approvedRequests, ArrayList<Request> rejectRequests, Payment payment) {
         this.approvedRequests = approvedRequests;
         this.rejectRequests = rejectRequests;
         this.payment = payment;

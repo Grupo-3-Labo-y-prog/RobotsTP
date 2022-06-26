@@ -55,7 +55,7 @@ public class Company {
             }
             cliente.setCleaning(cliente.getCleaning()+1);
             this.request.setRobotsAssigned(this.robots);
-            this.admission.getApprovedRequests().add(this.request);
+            this.admission.getApprovedRequests().put(this.request.getID(),this.request);
         } catch (ClientNullException c){
             System.out.println(c.getMessage());
         }
