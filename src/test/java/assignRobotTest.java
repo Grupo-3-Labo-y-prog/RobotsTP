@@ -52,15 +52,6 @@ class assignRobotTest {
         P011H.setCapableTasks();
         K311Ya.setCapableTasks();
 
-        /* Para probar el Test bonus 2 decomentar
-        Robots.S031RTY.getRequests().add(request2);
-        Robots.K311Yfu.getRequests().add(request2);
-        Robots.K311Yfl.getRequests().add(request);
-        Robots.K311Yfl.getRequests().add(request2);
-        Robots.K311Ya.getRequests().add(request);
-        Robots.K311Ya.getRequests().add(request2);
-*/
-
         TreeSet <Robot> robots = new TreeSet<>(new CostComparator());
         robots.add(K311Yfu);
         robots.add(K311Yfl);
@@ -147,25 +138,6 @@ class assignRobotTest {
         tasks.add(Tasks.ORDERING);
         tasks.add(Tasks.POLISHING);
         Request request = new Request(2,this.clientC, tasks, new Complex(), "42 Wallaby Way, Sydney");
-
-        assertEquals(expected, this.assignRobot.assignation(request));
-
-    }
-
-
-    //Test Bonus 2: Cliente patinum solicita limpieza y lustrado se le asigna Robots.Robot Robots.P011H porque aunque no tiene cero, es el que menos pedidos en cola tiene
-    //Para testearlo tuvimos que agregar pedidos en las colas de los robots, descomentar set up
-    @Test
-    void assignRobotWithoutQeueToPlatinum2 (){
-
-        Robot P011H = new P011H();
-        HashSet<Robot> expected = new HashSet<>();
-        expected.add(P011H);
-
-        ArrayList<Tasks> tasks = new ArrayList<>();
-        tasks.add(Tasks.CLEANNING);
-        tasks.add(Tasks.POLISHING);
-        Request request = new Request(5,this.clientP, tasks, new Complex(), "17 Cherry Tree Lane");
 
         assertEquals(expected, this.assignRobot.assignation(request));
 

@@ -144,7 +144,18 @@ public class Request {
     }
 
     public float getCost(){
-        return this.getCostService() + this.getCostTypeClean();
+        float amount = 0;
+
+        if (this.requestedServices != null){
+
+            amount += this.getCostService();
+        }
+        if (this.requestedTasks != null){
+
+            amount += this.getCostTypeClean();
+        }
+
+        return amount;
     }
 
     private float getCostService(){

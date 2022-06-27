@@ -169,7 +169,6 @@ class AdmissionTest {
         waste.add(Waste.DUST);
         this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 0, LocalDate.now().minusDays(0));
         this.admission.setTypeClean(request);
-        System.out.println(this.request.getTypeCleanning());
         assertEquals(Complex.class, this.request.getTypeCleanning().getClass());
 
     }
@@ -184,9 +183,9 @@ class AdmissionTest {
         waste.add(Waste.DUST);
         this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 2, LocalDate.now().minusDays(0));
         this.admission.setTypeClean(request);
-        System.out.println(this.request.getTypeCleanning());
         assertEquals(Complex.class, this.request.getTypeCleanning().getClass());
 
     }
+
 
 }
