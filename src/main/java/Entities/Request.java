@@ -181,4 +181,15 @@ public class Request {
         this.typeCleanning = typeCleanning;
         this.address = address;
     }
+
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, TypeClean typeCleanning, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning) {
+        this.ID = ID;
+        this.client = client;
+        this.requestedTasks = requestedTasks;
+        this.typeCleanning = typeCleanning;
+        this.address = address;
+        this.wastes = wastes;
+        this.pets = pets;
+        this.lastCleanning = lastCleanning;
+    }
 }
