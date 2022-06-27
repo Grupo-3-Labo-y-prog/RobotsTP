@@ -106,10 +106,11 @@ class Request{
 - int ID
 - Client client
 - ArrayList <Tasks> requestedTasks;
+- TreeSet <Waste> wastes;
 - ArrayList <Service>requestedServices;
 - TypeClean typeClean;
 - String address;
-- TreeSet <Waste> wastes;
+
 - int pets;
 - localDate lastCleanning;
 - float cost;

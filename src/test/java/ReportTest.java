@@ -38,6 +38,7 @@ public class ReportTest {
         Request request2 = new Request(2,this.client2, new ArrayList<>(), new Complex(), "Emilio Frers 2048, Martinez");
         requests.put(1, request);
         requests.put(2,request2);
+        admission = new Admission(new HashMap<>(),new ArrayList<>(), new Payment(new HashMap<>()));
     }
 
     @Test
@@ -45,6 +46,7 @@ public class ReportTest {
         assertEquals("Complex: 2 vs Simple: 0", this.report.quantityPerType(requests));
     }
 
+    //Se desean conocer los costos generados del cliente ID 1 quien realizó dos solicitudes en el mes.
     @Test
     void costPerClientTest(){
 
@@ -56,7 +58,6 @@ public class ReportTest {
         tasks.add(Tasks.CLEANNING);
         tasks.add(Tasks.ORDERING);
         TreeSet<Waste> waste = new TreeSet<>();
-        //waste.add(Waste.MUD);
         waste.add(Waste.DUST);
 
         ArrayList<Service> services = new ArrayList<>();
@@ -89,9 +90,41 @@ public class ReportTest {
         assertEquals(44686,this.report.costPerClient(clientes,1));
     }
 
-
+    //Se desean conocer los costos de una solicitud particular.
     @Test
     void costPerRequest(){
+        Employee employee1 = new Employee(1);
+        Employee employee2 = new Employee(2);
+        Employee employee3 = new Employee(3);
+        HashSet <Employee> employees = new HashSet<>();
+        employees.add(employee1);
+        employees.add(employee2);
+        employees.add(employee3);
 
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.MUD);
+        waste.add(Waste.DUST);
+
+        ArrayList<Service> services = new ArrayList<>();
+        services.add(new Gas(2,new Employee(1)));
+        services.add(new Electricity(7, new Employee(2)));
+
+
+        Request request1 = new Request(1,client1,tasks,services,"Calle Wallaby 42", waste,2, LocalDate.now().minusDays(3));
+        request1.setTypeCleanning(new Complex());
+
+        Request request2 = new Request(2,client2,tasks,services,"Calle Wallaby 42", waste,0, LocalDate.now().minusDays(111));
+        admission.setTypeClean(request2);
+
+        HashMap<Integer,Request> requests = new HashMap<>();
+        requests.put(1,request1);
+        requests.put(2,request2);//11171.5
+
+
+        assertEquals(11171.5, this.report.costPerRequest(requests,2));
     }
 }
