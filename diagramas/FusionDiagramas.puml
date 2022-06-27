@@ -68,11 +68,14 @@ class Company{
 - Request request;
 - Admission admission;
 - AssignRobot assignRobot;
+- Report reports;
 
 +void takeRequest() throws ClientNullException
 +void processRequest() throws CantOrderingException
 +void update()
-
++ void getTypeCleanningsQuantities();
++ void getCostByClient();
++ void getRequestCost();
 }
 class Admission{
 - ArrayList<Request> approvedRequests;

@@ -10,7 +10,7 @@ public class Client {
     private Membership membership;
     private int ordering; //contador de los ordenamientos que pidio en ese mes
     private int cleaning; //contador de las limpiezas que pidio en ese mes
-    private ArrayList<Request> requests;
+    private ArrayList<Request> requests = new ArrayList<>();
 
     public Client() {
     }

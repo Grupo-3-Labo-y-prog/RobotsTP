@@ -6,16 +6,17 @@ import Exceptions.LimitException;
 import Memberships.Classic;
 import Memberships.Economic;
 import Memberships.Membership;
+import Memberships.Platinum;
 import PaymentDB.Debt;
 import PaymentDB.Payment;
-import Services.Complex;
-import Services.Simple;
-import Services.Tasks;
+import Services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +26,8 @@ class AdmissionTest {
     Client client;
     Request request;
     Admission admission;
+
+    TypeClean typeClean;
 
     @BeforeEach
     void setUp() {
@@ -95,5 +98,95 @@ class AdmissionTest {
         this.admission.getPayment().getClients().put(this.client.getId(), new Debt(this.client.getId(), 2000));
         assertThrows(LimitException.class, () -> this.admission.validDebt(this.request));
     }
-    
+
+    @Test
+    void setTypeCleanningSimplexLastCleanning15Days() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 1, LocalDate.now().minusDays(14));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Simple.class, this.request.getTypeCleanning().getClass());
+
+    }
+
+    @Test
+    void setTypeCleanningSimplex1Pet() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 1, LocalDate.now().minusDays(2));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Simple.class, this.request.getTypeCleanning().getClass());
+
+    }
+
+    @Test
+    void setTypeCleanningSimplexOnlyDust() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 0, LocalDate.now().minusDays(2));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Simple.class, this.request.getTypeCleanning().getClass());
+
+    }
+
+    @Test
+    void setTypeCleanningComplexLastCleanning16Days() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 0, LocalDate.now().minusDays(16));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Complex.class, this.request.getTypeCleanning().getClass());
+
+    }
+    @Test
+    void setTypeCleanningComplexMudAndDust() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.MUD);
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 0, LocalDate.now().minusDays(0));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Complex.class, this.request.getTypeCleanning().getClass());
+
+    }
+
+    @Test
+    void setTypeCleanningComplex2Pets() {
+        this.client =   new Client(1,new Platinum(),1,2,new ArrayList<>());
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        this.request = new Request(4545, this.client,tasks,new Simple(), "avmaipu1212",waste, 2, LocalDate.now().minusDays(0));
+        this.admission.setTypeClean(request);
+        System.out.println(this.request.getTypeCleanning());
+        assertEquals(Complex.class, this.request.getTypeCleanning().getClass());
+
+    }
+
 }
