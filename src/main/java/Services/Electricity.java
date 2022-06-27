@@ -9,7 +9,7 @@ public class Electricity extends Service{
     }
 
     @Override
-    public float setCost() {
+    public float getCost() {
         float value = 0;
         if (super.getComplexity() < 3){
             value = 2000;

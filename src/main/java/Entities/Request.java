@@ -41,17 +41,15 @@ public class Request {
     public Request() {
     }
 
-    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, ArrayList<Service> requestedServices, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning, float cost) {
+    public Request(int ID, Client client, ArrayList<Tasks> requestedTasks, ArrayList<Service> requestedServices, String address, TreeSet<Waste> wastes, int pets, LocalDate lastCleanning) {
         this.ID = ID;
         this.client = client;
         this.requestedTasks = requestedTasks;
         this.requestedServices = requestedServices;
-        this.typeCleanning = getTypeCleanning();
         this.address = address;
         this.wastes = wastes;
         this.pets = pets;
         this.lastCleanning = lastCleanning;
-        this.cost = cost;
     }
 
     public String getAddress() {
@@ -151,12 +149,13 @@ public class Request {
 
     private float getCostService(){
         Iterator<Service> it = this.requestedServices.iterator();
-        Service aux = it.next();
         float amount = 0;
 
         while (it.hasNext()){
+            Service aux = it.next();
             amount += aux.getCost();
         }
+
 
         return amount;
 

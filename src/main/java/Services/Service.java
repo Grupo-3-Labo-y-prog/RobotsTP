@@ -32,11 +32,8 @@ public abstract class Service {
     }
 
 
-    public abstract float setCost();
+    public abstract float getCost();
 
-    public float getCost() {
-        return cost;
-    }
 
 
 }
