@@ -30,6 +30,7 @@ public class Company {
         try {
             admission.validMembership(this.request);
             admission.validDebt(this.request);
+            admission.setTypeClean(this.request);
             this.robots = assignRobot.assignation(this.request);
             update();
         } catch (CantOrderingException e){

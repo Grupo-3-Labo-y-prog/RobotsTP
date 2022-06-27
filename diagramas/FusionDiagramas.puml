@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
+!pragma layout smetana
 
 
 class Company
@@ -45,8 +46,8 @@ Request *-- Service
 Employee -up-* Service
 Service<|--Electricity
 Service<|--Gas
-Waste --left--* Request
-Task --* Request
+Waste -down-* Request
+Task -down-* Request
 Admission *-- Payment
 Payment o-- Debt
 Robot <|-- K311Ya
