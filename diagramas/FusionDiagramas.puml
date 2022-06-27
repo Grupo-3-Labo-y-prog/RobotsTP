@@ -1,0 +1,230 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Company
+class Admission
+class Request
+interface TypeClean
+class Simplex
+class Complex
+abstract class Service
+class Electricity
+class Gas
+class Client
+class Membership
+class Platinum
+class Classic
+class Economic
+class Employee
+class Report
+class AssignRobot
+class Payment
+abstract class Robot
+class K311Yfl
+class K311Yfu
+class P011H
+class K311Ya
+class S031RTY
+enum Task
+
+Client *-- Membership
+Membership <|-- Platinum
+Membership <|-- Classic
+Membership <|-- Economic
+Company *-- Request
+Company *-- Admission
+Company *-- AssignRobot
+Company *-right- Report
+Company *-- Robot
+Request *-- Client
+Request *-- TypeClean
+TypeClean <|-- Simplex
+TypeClean <|-- Complex
+Request *-- Service
+Employee -up-* Service
+Service<|--Electricity
+Service<|--Gas
+Waste --left--* Request
+Task --* Request
+Admission *-- Payment
+Payment o-- Debt
+Robot <|-- K311Ya
+Robot <|--S031RTY
+Robot <|--P011H
+Robot <|--K311Yfu
+Robot <|-- K311Yfl
+
+enum Task {
+CLEANNING,ORDERING,POLISHING
+}
+
+
+class Company{
+
+- HashMap<Integer, Client> clients;
+- HashSet<Employee> employees;
+- HashSet<Robot> robots;
+- Request request;
+- Admission admission;
+- AssignRobot assignRobot;
+
++void takeRequest() throws ClientNullException
++void processRequest() throws CantOrderingException
++void update()
+
+}
+class Admission{
+- ArrayList<Request> approvedRequests;
+- ArrayList<Request> rejectRequests;
+-Payment payment
+
++boolean validMembership(Request)
++boolean validDebt(Client)
++ void canOrdering(Request)
++void limitOfCleaning(Request)
++void limitOfOrdering(Request)
+}
+
+
+
+class Payment{
+-HashMap<Integer,Debt> clients
+}
+class Debt{
+- int ID;
+- float amount;
+}
+
+
+
+class Request{
+- int ID
+- Client client
+- ArrayList <Tasks> requestedTasks;
+- ArrayList <Service>requestedServices;
+- TypeClean typeClean;
+- String address;
+- TreeSet <Waste> wastes;
+- int pets;
+- localDate lastCleanning;
+- float cost;
+- HashSet <Robot> robotsAssigned;
+}
+
+
+enum Waste {
+MUD,DUST
+}
+
+class Client{
+-int ID
+-Membership
+-int ordering
+-int cleaning
+-ArrayList<Request> requests
+}
+
+class Membership{
+-String type
+-int limitDebt
+-int limitOrder
+-int limitClean
+-boolean canOrder
+}
+
+class Platinum{
+- final static int MAX_ORDER
+- final static int MAX_CLEAN
+- final static int LIMIT_DEBT
+- final static boolean CAN_ORDER
+}
+class Classic{
+- final static int MAX_ORDER
+- final static int MAX_CLEAN
+- final static int LIMIT_DEBT
+- final static boolean CAN_ORDER
+}
+class Economic{
+- final static int MAX_ORDER
+- final static int MAX_CLEAN
+- final static int LIMIT_DEBT
+- final static boolean CAN_ORDER
+ }
+abstract class Service{
+- int complexity;
+- Employee employee
+- float cost
++ getCost()
+}
+
+class Employee {
+- final double SALARY;
+- static final double HOUR;
+- int ID;
+- double salary;
++ double getSalaryPerHour();
+}
+
+class Electricity{
+}
+
+class Gas{
+
+}
+
+class Report {
++ typeCleanningsQuantities(Arraylist<Request>request)
++ costByClient(Arraylist<Request>request, int IdCliente)
++ requestCost(Arraylist<Request>request, int IdRequest)
+
+}
+
+interface TypeClean{
++ getCost()
+}
+class AssignRobot{
+-Request request;
+-ArrayList<Robot> robots;
+-HashSet<Robot> robotsAssigned;
+
++ HashSet<Robot> assignation(Request)
++ HashSet<Robot> capableRobots(TreeSet<Robot>)
++ void enqueueRobotsRequests(Robot)
+}
+
+abstract class Robot{
+-String model;
+-String surface;
+-int cost;
+-LinkedHashSet <Request> requests;
+-ArrayList<Tasks> capableTasks;
+
+}
+class K311Yfl{
+- final static int COST;
+- final static String SURFACE;
+- ArrayList<Tasks> capableTasks
+}
+class K311Yfu{
+- final static int COST;
+- final static String SURFACE;
+- ArrayList<Tasks> capableTasks
+}
+class P011H{
+- final static int COST;
+- final static String SURFACE;
+- ArrayList<Tasks> capableTasks
+}
+class S031RTY{
+- final static int COST;
+- final static String SURFACE;
+- ArrayList<Tasks> capableTasks
+}
+class K311Ya{
+- final static int COST;
+- final static String SURFACE;
+- ArrayList<Tasks> capableTasks
+}
+
+@enduml
