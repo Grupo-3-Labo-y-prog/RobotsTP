@@ -2,6 +2,7 @@ package Bussiness;
 
 import Entities.Client;
 import Entities.Employee;
+import Entities.Report;
 import Entities.Request;
 import Exceptions.CantOrderingException;
 import Exceptions.ClientNullException;
@@ -21,8 +22,9 @@ public class Company {
     private Admission admission;
     private AssignRobot assignRobot;
 
-
+private Report report;
     public void takeRequest(){
+        //a futuro cuando se utilice comunication
     }
 
     public void processRequest(){
@@ -61,6 +63,18 @@ public class Company {
             System.out.println(c.getMessage());
         }
 
+    }
+
+    public void getTypeCleanningsQuantities() {
+        System.out.println(report.quantityPerType(this.admission.getApprovedRequests()));
+    }
+
+    public void getCostByClient(int id) {
+        System.out.println(report.costPerClient(this.clients, id));
+    }
+
+    public void getRequestCost(int id) {
+        System.out.println(report.costPerRequest(this.admission.getApprovedRequests(), id));
     }
 
     public HashMap<Integer, Client> getClients() {
