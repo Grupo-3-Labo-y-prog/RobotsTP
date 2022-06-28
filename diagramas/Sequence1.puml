@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+autonumber
+Request -> Communication: toma el pedido
+activate Communication
+
+Communication -> Company: envia el pedido
+activate Company
+
+Company -> Admission:  Verifica si es cliente no tiene deuda y la membresia
+activate Admission
+
+Admission -> Membership: verifyMembership(Request)
+activate Membership
+deactivate Membership
+
+Admission --> Company: chequea que no pida cosas que no corresponde
+deactivate Admission
+
+Company --> Admission: verifyDebt(Client)
+activate Admission
+
+Admission -> Payment: findClient(int)
+activate Payment
+
+Payment --> Admission: return the debt
+deactivate Payment
+
+Admission --> Company: chequea que el debito este bien
+deactivate Admission
+
+Company -> SearchRobot: Search a robot for the job
+activate SearchRobot
+SearchRobot -> Robot:check the requests
+activate Robot
+deactivate Robot
+
+SearchRobot --> Company: return the robot for the job
+deactivate SearchRobot
+
+Company -> Payment: update the debt
+activate Payment
+deactivate Payment
+
+Company -> DataBaseRobot: update the requests of the robot
+activate DataBaseRobot
+deactivate DataBaseRobot
+
+Company --> Communication: retorna los datos para armar el recibo
+
+Communication --> Request: return a receipt with the date and the service
+deactivate Company
+
+@enduml

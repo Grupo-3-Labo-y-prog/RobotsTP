@@ -1,0 +1,167 @@
+@startuml
+'https://plantuml.com/class-diagram
+!pragma layout smetana
+class Client
+class Membership
+class Platinum
+class Classic
+class Economic
+class Request
+abstract class TypeClean
+class Simplex
+class Complex
+class Admission
+class Company
+class assignRobot
+class Payment
+abstract class Robot
+class K311Yfl
+class K311Yfu
+class P011H
+class K311Ya
+class S031RTY
+
+
+Client *-- Membership
+Membership <|-- Platinum
+Membership <|-- Classic
+Membership <|-- Economic
+Company *-- Admission
+Company *-- assignRobot
+Company *- Comunication
+Company *-- Robot
+Company *-- Request
+Request *-- Client
+Request *-- TypeClean
+TypeClean <|-- Simplex
+TypeClean <|-- Complex
+Robot <|-- K311Ya
+Robot <|--S031RTY
+Robot <|--P011H
+Robot <|--K311Yfu
+Robot <|-- K311Yfl
+Admission *-- Payment
+Payment o-- Debt
+
+class Debt{
+- int ID;
+- float amount;
+}
+
+Class Comunication{
+- int numberRequest = 0;
++printBill(Request, HashSet)
++Client receivesClient(int id)
++int receivesId()
++Request receivesRequest(Client)
+}
+
+abstract class Robot{
+-String model;
+-String surface;
+-int cost;
+-LinkedHashSet <Request> requests;
+-ArrayList<Tasks> capableTasks;
+
+}
+
+class Payment{
+-HashMap<Integer,Debt> clients
+}
+
+class Company{
+
+- HashMap<Integer, Client> clients;
+    - HashSet<Robot> robots;
+    - Request request;
+    - Admission admission;
+    - AssignRobot assignRobot;
+    - Comunication comunication;
+
+'llama a admission
++void takeRequest() throws ClientNullException
++void processRequest() throws CantOrderingException
++void update()
+
+}
+
+'posible clase
+class Admission{
+-ArrayList requestsApproved
+-ArrayList requestsReject
+-Payment payment
+'-ArrayList clients
+
+'ej: pedir un ordenamiento cuando no puede
++boolean validMembership(Request)
++boolean validDebt(Client)
++ void canOrdering(Request)
++void limitOfCleaning(Request)
++void limitOfOrdering(Request)
+
+
+}
+
+
+class assignRobot{
+-Request request;
+-ArrayList<Robot> robots ; //listado de mis cinco robts
+-HashSet<Robot> robotsAssigned;
+
++HashSet assignation(Request)
++HashSet<Robot> capableRobots(TreeSet<Robot>)
+
+
+'while Entities.Request.tareas != null
+    'recorro robots: if(robot instanceOf tarea) --> resultado.add(Robots.Robot,tarea)
+    'itero a la siguiente tarea
+    'si el robot siguiente puede hacer la otra tarea: if(robot instanceOf tarea) --> resultado.add(Robots.Robot,tarea) /se va a pisar en el mismo robot la segunda tarea (como es tree no se duplica el robot y asumo que ambas tareas la hace un solo robot. Por ahora solo asigno uno
+    'else (robot !instanceOf tarea)- voy al sig robot y así sucesivamente hasta que encuentro otro robot --> resultado.add(Robots.Robot,tarea)
+    'Aca se va a crear otro nodo de Robots.Robot voy a tener dos elementos en resultado: resultado(1): Robots.Robot XXX/LIMPIEZA - Robots.Robot YYY/ ORDENAM etc.
+    'voy a retornar el hashMap resultado y al iterarlo voy a saber que robots asigne
+}
+
+
+class Request{
+-int ID
+-Client
+-TypeClean
+-ArrayList <Tasks> requestedTasks;
+-String address
+}
+
+
+class Client{
+-int ID
+-Membership
+-int ordering
+-int cleaning
+'String address?
+}
+
+class Membership{
+-String type
+-int limitDebt
+-int limitOrder
+-int limitClean
+-boolean canOrder
+}
+
+class Platinum{
+final static int MAX_ORDER
+final static int MAX_CLEAN
+final static int LIMIT_DEBT
+}
+
+class K311Yfl{
+}
+class K311Yfu{
+}
+class P011H{
+}
+class S031RTY{
+}
+class K311Ya{
+
+}
+@enduml

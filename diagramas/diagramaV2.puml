@@ -1,0 +1,138 @@
+@startuml
+'https://plantuml.com/class-diagram
+!pragma layout smetana
+
+'Cómo se le asignan las horas trabajadas al robot?
+
+'Cómo sabes la complejidad de la reparación?
+
+'get price??
+
+
+
+class Client
+class Membership
+class Platinum
+class Classic
+class Economic
+class Request
+interface TypeClean
+class Simplex
+class Complex
+class Company
+abstract class Service
+class Electricity
+class Gas
+class Employee
+class Report
+
+Client *-- Membership
+Membership <|-- Platinum
+Membership <|-- Classic
+Membership <|-- Economic
+Company *-- Request
+Request *-- Client
+Request *-- TypeClean
+TypeClean <|-- Simplex
+TypeClean <|-- Complex
+Request*-Service
+Employee*-up-Service
+Service<|--Electricity
+Service<|--Gas
+
+class Company{
+
+- HashMap<Integer, Client> clients;
+- HashMap<Integer, Employee> employees;
+    - HashSet<Robot> robots;
+    - Request request;
+    - Admission admission;
+    - AssignRobot assignRobot;
+    - Comunication comunication;
+
+'llama a admission
++void takeRequest() throws ClientNullException
++void processRequest() throws CantOrderingException
++void update()
+
+}
+
+
+
+
+class Request{
+- int ID
+- Client
+- ArrayList <Tasks> requestedTasks;
+- ArrayList <Service>requestedServices;
+- String address
+- TypeClean
+- TreeSet <Waste>
+- int pets
+- Date lastCleanning
+- float cost
+
+- setTypeClean()
+
+}
+
+
+enum Waste {
+MUD,DUST
+}
+
+
+class Client{
+-int ID
+-Membership
+-int ordering
+-int cleaning
+-ArrayList<Request> requests
+}
+
+class Membership{
+-String type
+-int limitDebt
+-int limitOrder
+-int limitClean
+-boolean canOrder
+}
+
+class Platinum{
+final static int MAX_ORDER
+final static int MAX_CLEAN
+final static int LIMIT_DEBT
+}
+
+abstract class Service{
+- int complexity // Simple <= 4 > Compleja
+- Employee employee
+- float cost
++ getCost()
+}
+
+class Employee {
+-id
+- float salary
+}
+
+class Electricity{
+}
+
+class Gas{
+
+}
+
+class Report {
++ typeCleanningsQuantities(Arraylist<Request>request)
++ costByClient(Arraylist<Request>request, int IdCliente)
++ requestCost(Arraylist<Request>request, int IdRequest)
+
+}
+
+interface TypeClean{
++getCost()
+}
+
+
+@enduml

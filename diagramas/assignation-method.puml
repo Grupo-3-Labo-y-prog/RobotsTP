@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+Title: Method Assignation
+participant Company  #ffdd99
+participant AssignRobot #ffdd99
+
+Company -> AssignRobot: AssignRobot.Assignation(request)
+
+participant Robot #ffdd99
+
+AssignRobot -> Robot: Assignation(request)
+note right of AssignRobot
+Armamos TreeSet ordenado
+según criterio necesario
+end note
+
+Robot --> AssignRobot: TreeSet<Robots>
+participant Cleanning << (I, #ffb3ff  >> #ccffcc
+AssignRobot -> Cleanning: keyRobot.implementsInterface(Cleanning)
+Cleanning --> AssignRobot:true o false
+participant Polishing << (I, #ffb3ff  >> #ccffcc
+AssignRobot ->Polishing: keyRobot.implementsInterface(Polishing)
+Polishing --> AssignRobot: true o false
+participant Ordering << (I, #ffb3ff  >> #ccffcc
+AssignRobot ->Ordering: keyRobot.implementsInterface(Ordering)
+Ordering --> AssignRobot: true o false
+note left AssignRobot
+Devuelve HashSet de
+Robots Asignados
+end note
+AssignRobot --> Company: HashSet <Robot>
+
+@enduml
