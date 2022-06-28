@@ -101,5 +101,8 @@ private Report report;
         this.request = request;
     }
 
+    public Company() {
+    }
+
 
 }

@@ -42,6 +42,22 @@ public class ReportTest {
     }
 
     @Test
+    void quantityPerTypeTestNoTypeClean() {
+        TreeSet<Waste> waste = new TreeSet<>();
+        waste.add(Waste.DUST);
+        ArrayList<Tasks> tasks = new ArrayList<>();
+        tasks.add(Tasks.CLEANNING);
+        tasks.add(Tasks.ORDERING);
+        ArrayList<Service> services = new ArrayList<>();
+        services.add(new Gas(2,new Employee(1)));
+        Request request = new Request(3,new Client(), tasks, services, "Siempre viva 1234", waste,2, LocalDate.now().minusDays(3));
+        this.requests.put(3, request);
+        Request request2 = new Request(4,this.client1, new ArrayList<>(), new Simple(), "Siempre viva 1234");
+        this.requests.put(4,request2);
+        assertEquals("Complex: 2 vs Simple: 1", this.report.quantityPerType(requests));
+    }
+
+    @Test
     void quantityPerTypeTest() {
         assertEquals("Complex: 2 vs Simple: 0", this.report.quantityPerType(requests));
     }

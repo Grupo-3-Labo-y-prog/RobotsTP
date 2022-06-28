@@ -13,8 +13,8 @@ public class Report {
 
         Collection<Request> requests = requestHashMap.values();
 
-        int complex = (int) requests.stream().filter(r -> r.getTypeCleanning().getClass() == Complex.class).count();
-        int simple = (int) requests.stream().filter(r -> r.getTypeCleanning().getClass() == Simple.class).count();
+        int complex = (int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Complex.class).count();
+        int simple = (int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Simple.class).count();
 
         // devuelve "Complex: (cantidad) vs Simple: (cantidad)"
         return "Complex: " + complex + " vs Simple: " + simple;
