@@ -22,6 +22,6 @@ public class Employee {
     }
 
     public double getSalaryPerHour(){
-        return this.salary/160;
+        return this.salary/HOUR;
     }
 }

@@ -1,15 +1,6 @@
 import Bussiness.Admission;
-import Entities.Client;
-import Entities.Employee;
-import Entities.Report;
-import Entities.Request;
-import Exceptions.CantOrderingException;
-import Exceptions.LimitException;
-import Memberships.Classic;
-import Memberships.Economic;
-import Memberships.Membership;
+import Entities.*;
 import Memberships.Platinum;
-import PaymentDB.Debt;
 import PaymentDB.Payment;
 import Services.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,12 +45,22 @@ public class ReportTest {
         this.requests.put(3, request);
         Request request2 = new Request(4,this.client1, new ArrayList<>(), new Simple(), "Siempre viva 1234");
         this.requests.put(4,request2);
-        assertEquals("Complex: 2 vs Simple: 1", this.report.quantityPerType(requests));
+        AmountOfCleaning expected = new AmountOfCleaning();
+        expected.setAmountOfComplex(2);
+        expected.setAmountOfSimple(1);
+
+        assertEquals(expected.getAmountOfComplex(), this.report.quantityPerType(requests).getAmountOfComplex());
+        assertEquals(expected.getAmountOfSimple(), this.report.quantityPerType(requests).getAmountOfSimple());
     }
 
     @Test
     void quantityPerTypeTest() {
-        assertEquals("Complex: 2 vs Simple: 0", this.report.quantityPerType(requests));
+        AmountOfCleaning expected = new AmountOfCleaning();
+        expected.setAmountOfComplex(2);
+        expected.setAmountOfSimple(0);
+
+        assertEquals(expected.getAmountOfComplex(), this.report.quantityPerType(requests).getAmountOfComplex());
+        assertEquals(expected.getAmountOfSimple(), this.report.quantityPerType(requests).getAmountOfSimple());
     }
 
     //Se desean conocer los costos generados del cliente ID 1 quien realizó dos solicitudes en el mes.

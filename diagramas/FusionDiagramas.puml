@@ -28,8 +28,10 @@ class P011H
 class K311Ya
 class S031RTY
 enum Task
+class AmountOfCleaning
 
 Client *-- Membership
+
 Membership <|-- Platinum
 Membership <|-- Classic
 Membership <|-- Economic
@@ -40,24 +42,26 @@ Company *-right- Report
 Company *-- Robot
 Request *-- Client
 Request *-- TypeClean
+Request *-- Service
 TypeClean <|-- Simplex
 TypeClean <|-- Complex
-Request *-- Service
 Employee -up-* Service
 Service<|--Electricity
 Service<|--Gas
 Waste -down-* Request
 Task -down-* Request
 Admission *-- Payment
+
 Payment o-- Debt
 Robot <|-- K311Ya
 Robot <|--S031RTY
 Robot <|--P011H
 Robot <|--K311Yfu
 Robot <|-- K311Yfl
+Report -> AmountOfCleaning
 
 enum Task {
-CLEANNING,ORDERING,POLISHING
+CLEANING,ORDERING,POLISHING
 }
 
 
@@ -74,7 +78,7 @@ class Company{
 +void takeRequest() throws ClientNullException
 +void processRequest() throws CantOrderingException
 +void update()
-+ void getTypeCleanningsQuantities();
++ void getTypeCleaningsQuantities();
 + void getCostByClient();
 + void getRequestCost();
 }
@@ -104,7 +108,7 @@ class Debt{
 
 class Request{
 - int ID
-- Client client
+- Client
 - ArrayList <Tasks> requestedTasks;
 - TreeSet <Waste> wastes;
 - ArrayList <Service>requestedServices;
@@ -112,9 +116,11 @@ class Request{
 - String address;
 
 - int pets;
-- localDate lastCleanning;
+- localDate lastCleaning;
 - float cost;
 - HashSet <Robot> robotsAssigned;
+
++float getCost()
 }
 
 
@@ -158,7 +164,7 @@ class Economic{
  }
 abstract class Service{
 - int complexity;
-- Employee employee
+- Employee
 - float cost
 + getCost()
 }
@@ -179,8 +185,8 @@ class Gas{
 }
 
 class Report {
-+ typeCleanningsQuantities(Arraylist<Request>request)
-+ costByClient(Arraylist<Request>request, int IdCliente)
++ typeCleaningsQuantities(Arraylist<Request>request)
++ costByClient(Arraylist<Request>request, int IdClient)
 + requestCost(Arraylist<Request>request, int IdRequest)
 
 }
@@ -231,5 +237,28 @@ class K311Ya{
 - final static String SURFACE;
 - ArrayList<Tasks> capableTasks
 }
+
+class AmountOfCleaning{
+-int complex
+-int simple
+}
+
+class Request
+note left
+public float getCost(){
+        float amount = 0;
+
+        if (this.requestedServices != null){
+
+            amount += this.getCostService();
+        }
+        if (this.requestedTasks != null){
+
+            amount += this.getCostTypeClean();
+        }
+
+        return amount;
+}
+end note
 
 @enduml

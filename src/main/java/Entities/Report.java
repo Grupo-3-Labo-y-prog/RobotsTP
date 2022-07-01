@@ -3,21 +3,20 @@ package Entities;
 import Services.Complex;
 import Services.Simple;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 public class Report {
 
-    public String quantityPerType(HashMap<Integer, Request> requestHashMap){
+    public AmountOfCleaning quantityPerType(HashMap<Integer, Request> requestHashMap){
 
         Collection<Request> requests = requestHashMap.values();
 
-        int complex = (int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Complex.class).count();
-        int simple = (int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Simple.class).count();
+        AmountOfCleaning types = new AmountOfCleaning();
+        types.setAmountOfComplex((int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Complex.class).count());
+        types.setAmountOfSimple((int) requests.stream().filter(r -> r.getTypeCleanning() !=null).filter(r -> r.getTypeCleanning().getClass() == Simple.class).count());
 
-        // devuelve "Complex: (cantidad) vs Simple: (cantidad)"
-        return "Complex: " + complex + " vs Simple: " + simple;
+        return types;
     }
 
     public float costPerClient(HashMap<Integer, Client> clients, int id){

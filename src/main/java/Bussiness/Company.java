@@ -1,9 +1,6 @@
 package Bussiness;
 
-import Entities.Client;
-import Entities.Employee;
-import Entities.Report;
-import Entities.Request;
+import Entities.*;
 import Exceptions.CantOrderingException;
 import Exceptions.ClientNullException;
 import Exceptions.LimitException;
@@ -66,7 +63,8 @@ private Report report;
     }
 
     public void getTypeCleanningsQuantities() {
-        System.out.println(report.quantityPerType(this.admission.getApprovedRequests()));
+        AmountOfCleaning types = this.report.quantityPerType(this.admission.getApprovedRequests());
+        System.out.println("Simple: " + types.getAmountOfSimple() + " vs. Complex: " + types.getAmountOfComplex());
     }
 
     public void getCostByClient(int id) {
